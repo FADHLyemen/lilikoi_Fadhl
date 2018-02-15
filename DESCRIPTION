@@ -1,0 +1,19 @@
+Package: lilikoi
+Title: Metabolomics personlaized pathway analysis tool
+Version: 0.1.0
+Authors@R:c(
+ person("Fadhl", "Alakwaa", email = "falakwaa@hawaii.edu", role = c("aut", "cre")),
+ person("Sijia", "Huang", email = "scarlettcanny@gmail.com", role = c( "aut")))
+Description: This package computes the pathway desergulation score for the metabolites, slect the pathway with the high mutual information and then use them to build a classifier.
+Imports:
+	ggplot2,
+	dplyr,
+	pathifier,
+	RWeka,
+	infotheo,
+	pROC
+Depends: R (>= 3.4.3)
+License: GPL-2
+Encoding:UTF-8
+LazyData: true
+RoxygenNote: 6.0.1.9000
