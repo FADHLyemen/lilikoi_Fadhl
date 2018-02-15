@@ -15,6 +15,7 @@ machine_learning<-function(PDSmatrix,selected_Pathways_Weka){
 require(caret)
 require(pROC)
 require(ggplot2)
+require(gbm)
 #t(PDSmatrix[selected_Pathways_Weka,])
 prostate_df=data.frame(t((PDSmatrix[selected_Pathways_Weka,])),Label=Metadata$Label, check.names=T)
 colnames(prostate_df)[which(names(prostate_df) == "Label")]='subtype'
