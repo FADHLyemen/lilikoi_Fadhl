@@ -14,7 +14,7 @@
 
 PDSfun<-function(qvec){
 
-  #require(pathifier)
+  require(pathifier)
   #load("../data/meta_path.RData",.GlobalEnv);
   #load(paste0(getwd(),"/","data/","meta_path.RData"), .GlobalEnv);
 
