@@ -105,7 +105,13 @@ performance_testing_list <- list()
   ldaClasses <- predict( fit.lda, newdata = irisTest,type="prob")
   ldaClasses1 <- predict( fit.lda, newdata = irisTest)
   ldaConfusion=confusionMatrix(data = ldaClasses1, irisTest$subtype)
+  
+  
+    if(ROC_smoth){
+   lda.ROC <- roc(predictor=ldaClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
+  }else {
   lda.ROC <- roc(predictor=ldaClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+  }
   
   performance_testing[1,2]=as.numeric(lda.ROC$auc)#AUC
   performance_testing[2,2]=ldaConfusion$byClass[1]#SENS
@@ -129,7 +135,14 @@ performance_testing_list <- list()
   svmClasses <- predict( fit.svm, newdata = irisTest,type="prob")
   svmClasses1 <- predict( fit.svm, newdata = irisTest)
   svmConfusion=confusionMatrix(data = svmClasses1, irisTest$subtype)
+  
+   if(ROC_smoth){
+   svm.ROC <- roc(predictor=svmClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
+  }else {
   svm.ROC <- roc(predictor=svmClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+  }
+  
+ 
   
   performance_testing[1,3]=as.numeric(svm.ROC$auc)#AUC
   performance_testing[2,3]=svmConfusion$byClass[1]#SENS
@@ -152,7 +165,14 @@ performance_testing_list <- list()
   rfClasses <- predict( fit.rf, newdata = irisTest,type="prob")
   rfClasses1 <- predict( fit.rf, newdata = irisTest)
   rfConfusion=confusionMatrix(data = rfClasses1, irisTest$subtype)
+  
+   if(ROC_smoth){
+   rf.ROC <- roc(predictor=rfClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
+  }else {
   rf.ROC <- roc(predictor=rfClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+  }
+  
+ 
   
   performance_testing[1,4]=as.numeric(rf.ROC$auc)#AUC
   performance_testing[2,4]=rfConfusion$byClass[1]#SENS
@@ -176,7 +196,15 @@ performance_testing_list <- list()
   gbmClasses <- predict( fit.gbm, newdata = irisTest,type="prob")
   gbmClasses1 <- predict( fit.gbm, newdata = irisTest)
   gbmConfusion=confusionMatrix(data = gbmClasses1, irisTest$subtype)
-  gbm.ROC <- roc(predictor=gbmClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+  
+  if(ROC_smoth){
+    gbm.ROC <- roc(predictor=gbmClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
+	
+  }else {
+   gbm.ROC <- roc(predictor=gbmClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+  }
+  
+ 
   
   performance_testing[1,5]=as.numeric(gbm.ROC$auc)#AUC
   performance_testing[2,5]=gbmConfusion$byClass[1]#SENS
@@ -199,7 +227,15 @@ performance_testing_list <- list()
   pamClasses <- predict( fit.pam, newdata = irisTest,type="prob")
   pamClasses1 <- predict( fit.pam, newdata = irisTest)
   pamConfusion=confusionMatrix(data = pamClasses1, irisTest$subtype)
-  pam.ROC <- roc(predictor=pamClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+  
+  if(ROC_smoth){
+  
+     pam.ROC <- roc(predictor=pamClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
+  }else {
+       pam.ROC <- roc(predictor=pamClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+  }
+  
+ 
   
   performance_testing[1,6]=as.numeric(pam.ROC$auc)#AUC
   performance_testing[2,6]=pamConfusion$byClass[1]#SENS
