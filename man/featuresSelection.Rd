@@ -4,7 +4,7 @@
 \alias{featuresSelection}
 \title{A featuresSelection Function}
 \usage{
-featuresSelection(PDSmatrix)
+featuresSelection(PDSmatrix, threshold = 0.5, method = "emp")
 }
 \arguments{
 \item{PDSmatrix}{from PDSfun function}

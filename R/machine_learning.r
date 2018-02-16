@@ -316,10 +316,10 @@ par(new=TRUE)
 plot(smooth(pam.ROC,method="fitdistr"),col="hotpink")
 par(new=TRUE)
 #plot(log.ROC, col="lightgoldenrod2", main="Testing ROC" )
-plot(smooth(log.ROC,method="fitdistr"),col="lightgoldenrod2",main="Testing ROC)
+plot(smooth(log.ROC,method="fitdistr"),col="lightgoldenrod2",main="Testing ROC")
     
-legend(0.2, 0.4, legend=c('RPART','LDA','SVM','RF','GBM','PAM','LOG'),
-       col=c("red", "green","black","orange","blue","hotpink","lightgoldenrod2"), lty=1:2, cex=0.8)   
+legend(0.2, 0.4, legend=c('RPART','LDA','SVM','RF','GBM','PAM','LOG'), 
+ col=c("red", "green","black","orange","blue","hotpink","lightgoldenrod2"), lty=1:2, cex=0.8)   
   
 ######################performance plotting
 #require(ggplot)
