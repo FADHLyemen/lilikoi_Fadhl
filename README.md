@@ -10,8 +10,8 @@ if(length(new.packages)) install.packages(new.packages)
 
 
 if you have problem with installing Rweka as it requirtes Java, you can reconfiguring R from the command line by runing the below line:
+
 R CMD javareconf
-https://gist.github.com/mmulvahill/ddd75eb352979cc922bae001505833cb
 
 # Example Code
 
