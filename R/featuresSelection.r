@@ -9,7 +9,7 @@
 #'
 #'
 #'
-featuresSelection <- function(PDSmatrix,threshold= 0.5,method="emp"){
+featuresSelection <- function(PDSmatrix,threshold= 0.5,method="info"){
   require(caret)
   require(RWeka)
   require(infotheo)
@@ -20,12 +20,17 @@ featuresSelection <- function(PDSmatrix,threshold= 0.5,method="emp"){
   training_ID <- createDataPartition(pds_matrix$Label, p = .8,list = FALSE,times = 1)
   training_diagnosis<-pds_matrix[training_ID,]
   #head(training_diagnosis)
+  if (method=="info"){
   InfoGainAttributeEval(as.logical(training_diagnosis$Label-1) ~ . , data = training_diagnosis)->infogainfeatures
-  selected_pathways<-names(infogainfeatures[infogainfeatures>threshold])
+  selected_pathways<-names(infogainfeatures[infogainfeatures>threshold])}
+  else{
+  GainRatioAttributeEval(as.logical(training_diagnosis$Label-1) ~ . , data = training_diagnosis)->infogainfeatures
+  selected_pathways<-names(infogainfeatures[infogainfeatures>threshold])}
+  
 
   info.paireddiagnosis.R<-discretize(training_diagnosis[,selected_pathways])
   info.paireddiagnosis.R<-cbind(info.paireddiagnosis.R,as.numeric(as.matrix(training_diagnosis[,ncol(training_diagnosis)])))
-  I.R <- mutinformation(info.paireddiagnosis.R,method= method)
+  I.R <- mutinformation(info.paireddiagnosis.R,method= "emp")
   I.R.paireddiagnosis<-I.R[,ncol(I.R)]
   #I.R.paireddiagnosis
   theTable <- within(as.data.frame(I.R.paireddiagnosis),
