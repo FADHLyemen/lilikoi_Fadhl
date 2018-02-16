@@ -11,7 +11,7 @@
 #'
 #'
 
-machine_learning<-function(PDSmatrix,selected_Pathways_Weka){
+machine_learning<-function(PDSmatrix,selected_Pathways_Weka,ROC_smoth=FALSE){
 require(caret)
 require(pROC)
 require(ggplot2)
@@ -73,8 +73,12 @@ performance_testing_list <- list()
   cartClasses <- predict( fit.cart, newdata = irisTest,type="prob")
   cartClasses1 <- predict( fit.cart, newdata = irisTest)
   cartConfusion=confusionMatrix(data = cartClasses1, irisTest$subtype)
+  if(ROC_smoth){
+  cart.ROC <- roc(predictor=cartClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
+  }else {
   cart.ROC <- roc(predictor=cartClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
-  #cart.ROC <- roc(predictor=cartClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
+  }
+  
   
   performance_testing[1,1]=as.numeric(cart.ROC$auc)#AUC
   performance_testing[2,1]=cartConfusion$byClass[1]#SENS
