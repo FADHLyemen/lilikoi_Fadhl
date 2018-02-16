@@ -6,10 +6,6 @@ Authors@R:c(
  person("Sijia", "Huang", email = "scarlettcanny@gmail.com", role = c( "aut")))
 Description: This package computes the pathway desergulation score for the metabolites, slect the pathway with the high mutual information and then use them to build a classifier.
 Imports:
-	ggplot2,
-	dplyr,
-	pathifier,
-	RWeka,
 	infotheo,
 	pROC
 Depends: R (>= 3.4.3)
