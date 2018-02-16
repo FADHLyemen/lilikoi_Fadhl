@@ -16,7 +16,6 @@ require(caret)
 require(pROC)
 require(ggplot2)
 require(gbm)
-#t(PDSmatrix[selected_Pathways_Weka,])
 prostate_df=data.frame(t((PDSmatrix[selected_Pathways_Weka,])),Label=Metadata$Label, check.names=T)
 colnames(prostate_df)[which(names(prostate_df) == "Label")]='subtype'
 
@@ -26,8 +25,8 @@ performance_testing=matrix( rep( 0, len=56), nrow = 8)  # ROC  SENS SPEC
 
 performance=matrix(rep( 0, len=56), nrow = 8)  # ROC  SENS SPEC
 
-performance_training_list<<- list()
-performance_testing_list<<- list()
+performance_training_list <- list()
+performance_testing_list <- list()
 
    var.cart= list()
    var.lda= list()
@@ -38,13 +37,13 @@ performance_testing_list<<- list()
    var.log= list()
 
 
-for (k in 1:1) {
-    
+
   ###############Shuffle stat first
   rand <- sample(nrow(prostate_df))
   prostate_df=prostate_df[rand, ]
      
-  ###############Randomly Split  the data in to training and testing   
+  ###############Randomly Split  the data in to training and testing 
+    set.seed(1024)
   trainIndex <- createDataPartition(prostate_df$subtype, p = .8,list = FALSE,times = 1)
   irisTrain <- prostate_df[ trainIndex,]
   irisTest  <- prostate_df[-trainIndex,]
@@ -59,7 +58,7 @@ for (k in 1:1) {
   
   #assign(paste0("fit.cart",k),train(subtype~., data=irisTrain, method="rpart", trControl=control,metric="ROC"))
     
-    #supress the warning messgae
+    # supress the warning messgae
     #options(warn=-1)
     #options(warn=0)
     #?suppressWarnings()
@@ -91,7 +90,7 @@ for (k in 1:1) {
   #2-LDA ALGORITHM 
   set.seed(7) 
   #assign(paste0("fit.lda",k),train(subtype~., data=irisTrain, method="pls", trControl=control,metric="ROC"))
- garbage <- suppressWarnings(capture.output(fit.lda <- train(subtype~., data=irisTrain, method = 'lda', 
+  garbage <- suppressWarnings(capture.output(fit.lda <- train(subtype~., data=irisTrain, method = 'lda', 
                                             trControl=control,metric="ROC",trace=F))) #loclda) 
     #fit.lda <- train(subtype~., data=irisTrain, method = 'lda', trControl=control,metric="ROC") #loclda 
   performance_training[1,2]=max(fit.lda$results$ROC)#AUC
@@ -162,7 +161,7 @@ for (k in 1:1) {
   
   #5- GBM ALGORITHM 
   set.seed(7)
-garbage <- suppressWarnings(capture.output(fit.gbm <- train(subtype~., data=irisTrain, 
+ garbage <- suppressWarnings(capture.output(fit.gbm <- train(subtype~., data=irisTrain, 
                                            method="gbm", trControl=control,metric="ROC")))
  # fit.gbm <- train(subtype~., data=irisTrain, method="gbm", trControl=control,metric="ROC")
   performance_training[1,5]=max(fit.gbm$results$ROC) #AUC
@@ -233,21 +232,29 @@ garbage <- suppressWarnings(capture.output(fit.gbm <- train(subtype~., data=iris
   performance_testing[7,7]=logConfusion$byClass[7]#F1
   performance_testing[8,7]=logConfusion$byClass[11]#BALANCED ACCURACY
     
-  performance_testing_list[[k]]<<- performance_testing
-  performance_training_list[[k]]<<- performance_training
+#   performance_testing_list[[k]]<<- performance_testing
+#   performance_training_list[[k]]<<- performance_training
+    
+  performance_testing_list[[1]] <- performance_testing
+  performance_training_list[[1]] <- performance_training
     
   performance_training=matrix( rep( 0, len=21), nrow = 3)  #AUC   SENS    SPECF
   performance_testing=matrix( rep( 0, len=56), nrow = 8)  # ROC  SENS SPEC
        
-   var.cart[[k]]= varImp(fit.cart, scale = FALSE,top=20)
-   var.lda[[k]]= varImp(fit.lda, scale = FALSE,top=20)
-   var.svm[[k]]=varImp(fit.svm, scale = FALSE,top=20)
-   var.rf[[k]]= varImp(fit.rf, scale = FALSE,top=20)
-   var.gbm[[k]]=varImp(fit.gbm, scale = FALSE,top=20)
-   var.pam[[k]]= varImp(fit.pam, scale = FALSE,top=20)
-   var.log[[k]]= varImp(fit.log, scale = FALSE,top=20)
+
+ #####plot the variable importance
+   #par(mfrow=c(7,1))
+   plot(plot(varImp(fit.cart, scale = FALSE,top=20),main="RPART"))
+   plot(plot(varImp(fit.lda, scale = FALSE,top=20),main="LDA"))
+   plot(plot(varImp(fit.svm, scale = FALSE,top=20),main="SVM"))
     
-}
+   plot(plot(varImp(fit.rf, scale = FALSE,top=20),main="RF"))
+   plot(plot(varImp(fit.gbm, scale = FALSE,top=20),main="GBM"))
+   plot(plot(varImp(fit.pam, scale = FALSE,top=20),main="PAM"))
+   plot(plot(varImp(fit.log, scale = FALSE,top=20),main="LOG"))
+    
+ 
+    
  #############plot ROC
     
 plot(cart.ROC, col="red" )
