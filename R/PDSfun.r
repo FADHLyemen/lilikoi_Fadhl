@@ -20,8 +20,8 @@ PDSfun<-function(qvec){
 
   phe=(Metadata$Label) %>% as.numeric  %>% -1
 
-  newData1=qvec %>% filter(pathway!='NA')%>% select(Match,HMDB)
-  newData=(Metadata[,t(newData1['Match'])])
+  newData1=qvec %>% filter(pathway!='NA')%>% select(Query,HMDB)
+  newData=Metadata[,t(newData1['Match'])]
   colnames(newData)=t(newData1['HMDB'])
   newData=t(newData)
 
