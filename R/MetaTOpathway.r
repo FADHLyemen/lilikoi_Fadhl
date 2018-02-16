@@ -322,7 +322,7 @@ PerformApproxMatch<-function(inx){
 
   matched.dist <- NULL;
   q.length <- nchar(q);
-  s <- c(0, 0.1, 0.2,0.3);
+  s <- c(0, 0.1, 0.2,0.3,0.5);
   for (j in s) {
     new.q <- q;
     if(q.length > 32){ # note: agrep fail for exact match when length over 32 characters
