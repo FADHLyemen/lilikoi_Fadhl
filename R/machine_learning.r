@@ -11,7 +11,7 @@
 #'
 #'
 
-machine_learning<-function(PDSmatrix,selected_Pathways_Weka,ROC_smoth=FALSE){
+machine_learning<-function(PDSmatrix,selected_Pathways_Weka){
 require(caret)
 require(pROC)
 require(ggplot2)
@@ -64,7 +64,7 @@ performance_testing_list <- list()
     #?suppressWarnings()
     
   garbage <- capture.output(fit.cart <- train(subtype~., data=irisTrain, method = 'rpart', trControl=control,metric="ROC"))
-  fit.cart <- train(subtype~., data=irisTrain, method = 'rpart', trControl=control,metric="ROC") #loclda 
+  #fit.cart <- train(subtype~., data=irisTrain, method = 'rpart', trControl=control,metric="ROC") #loclda 
   performance_training[1,1]=max(fit.cart$results$ROC)#AUC
   performance_training[2,1]=fit.cart$results$Sens[which.max(fit.cart$results$ROC)]# sen
   performance_training[3,1]=fit.cart$results$Spec[which.max(fit.cart$results$ROC)]# spec
@@ -73,11 +73,9 @@ performance_testing_list <- list()
   cartClasses <- predict( fit.cart, newdata = irisTest,type="prob")
   cartClasses1 <- predict( fit.cart, newdata = irisTest)
   cartConfusion=confusionMatrix(data = cartClasses1, irisTest$subtype)
-  if(ROC_smoth){
-  cart.ROC <- roc(predictor=cartClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
-  }else {
-  cart.ROC <- roc(predictor=cartClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
-  }
+
+   cart.ROC <- roc(predictor=cartClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+  
   
   
   performance_testing[1,1]=as.numeric(cart.ROC$auc)#AUC
@@ -107,11 +105,9 @@ performance_testing_list <- list()
   ldaConfusion=confusionMatrix(data = ldaClasses1, irisTest$subtype)
   
   
-    if(ROC_smoth){
-   lda.ROC <- roc(predictor=ldaClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
-  }else {
-  lda.ROC <- roc(predictor=ldaClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
-  }
+   
+ lda.ROC <- roc(predictor=ldaClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+  
   
   performance_testing[1,2]=as.numeric(lda.ROC$auc)#AUC
   performance_testing[2,2]=ldaConfusion$byClass[1]#SENS
@@ -136,11 +132,10 @@ performance_testing_list <- list()
   svmClasses1 <- predict( fit.svm, newdata = irisTest)
   svmConfusion=confusionMatrix(data = svmClasses1, irisTest$subtype)
   
-   if(ROC_smoth){
-   svm.ROC <- roc(predictor=svmClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
-  }else {
+   
+    
   svm.ROC <- roc(predictor=svmClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
-  }
+
   
  
   
@@ -166,11 +161,9 @@ performance_testing_list <- list()
   rfClasses1 <- predict( fit.rf, newdata = irisTest)
   rfConfusion=confusionMatrix(data = rfClasses1, irisTest$subtype)
   
-   if(ROC_smoth){
-   rf.ROC <- roc(predictor=rfClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
-  }else {
-  rf.ROC <- roc(predictor=rfClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
-  }
+   
+    rf.ROC <- roc(predictor=rfClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
+ 
   
  
   
@@ -197,12 +190,9 @@ performance_testing_list <- list()
   gbmClasses1 <- predict( fit.gbm, newdata = irisTest)
   gbmConfusion=confusionMatrix(data = gbmClasses1, irisTest$subtype)
   
-  if(ROC_smoth){
-    gbm.ROC <- roc(predictor=gbmClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
-	
-  }else {
+ 
    gbm.ROC <- roc(predictor=gbmClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
-  }
+  
   
  
   
@@ -228,12 +218,9 @@ performance_testing_list <- list()
   pamClasses1 <- predict( fit.pam, newdata = irisTest)
   pamConfusion=confusionMatrix(data = pamClasses1, irisTest$subtype)
   
-  if(ROC_smoth){
-  
-     pam.ROC <- roc(predictor=pamClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)),smooth=TRUE)
-  }else {
+ 
        pam.ROC <- roc(predictor=pamClasses$Normal,response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
-  }
+  
   
  
   
@@ -287,7 +274,6 @@ performance_testing_list <- list()
    plot(plot(varImp(fit.cart, scale = FALSE,top=20),main="RPART"))
    plot(plot(varImp(fit.lda, scale = FALSE,top=20),main="LDA"))
    plot(plot(varImp(fit.svm, scale = FALSE,top=20),main="SVM"))
-    
    plot(plot(varImp(fit.rf, scale = FALSE,top=20),main="RF"))
    plot(plot(varImp(fit.gbm, scale = FALSE,top=20),main="GBM"))
    plot(plot(varImp(fit.pam, scale = FALSE,top=20),main="PAM"))
