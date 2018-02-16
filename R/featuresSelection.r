@@ -9,7 +9,7 @@
 #'
 #'
 #'
-featuresSelection <- function(PDSmatrix){
+featuresSelection <- function(PDSmatrix,threshold= 0.5,method="emp"){
   require(caret)
   require(RWeka)
   require(infotheo)
@@ -21,11 +21,11 @@ featuresSelection <- function(PDSmatrix){
   training_diagnosis<-pds_matrix[training_ID,]
   #head(training_diagnosis)
   InfoGainAttributeEval(as.logical(training_diagnosis$Label-1) ~ . , data = training_diagnosis)->infogainfeatures
-  selected_pathways<-names(infogainfeatures[infogainfeatures>0.2])
+  selected_pathways<-names(infogainfeatures[infogainfeatures>threshold])
 
   info.paireddiagnosis.R<-discretize(training_diagnosis[,selected_pathways])
   info.paireddiagnosis.R<-cbind(info.paireddiagnosis.R,as.numeric(as.matrix(training_diagnosis[,ncol(training_diagnosis)])))
-  I.R <- mutinformation(info.paireddiagnosis.R,method= "emp")
+  I.R <- mutinformation(info.paireddiagnosis.R,method= method)
   I.R.paireddiagnosis<-I.R[,ncol(I.R)]
   #I.R.paireddiagnosis
   theTable <- within(as.data.frame(I.R.paireddiagnosis),
