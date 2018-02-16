@@ -284,7 +284,7 @@ performance_testing_list <- list()
  #############plot ROC
     
 #plot(cart.ROC, col="red" )
-plot(smooth(cart.ROC,method="fitdistr"),col="red")
+plot(smooth(cart.ROC,method="density"),col="red")
 par(new=TRUE)
 #plot( lda.ROC, col="green" )
 plot(smooth(lda.ROC,method="fitdistr"),col="green")
