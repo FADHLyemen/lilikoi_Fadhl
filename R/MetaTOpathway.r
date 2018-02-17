@@ -6,7 +6,7 @@
 #' cmpd_db.rda, syn_nms_db.rda and Sijia_pathway.rda
 #' This function was modified version of the name.match function in the below link:
 #' https://github.com/cangfengzhe/Metabo/blob/master/MetaboAnalyst/website/name_match.R
-#' @param The type of the metabolites id (name,kegg,hmdb,pubchem)
+#' @param q.type The type of the metabolites id such as 'name', 'kegg', 'hmdb','pubchem'
 #' @keywords Match
 #' @export
 #' @examples Metabolite_pathway_table=MetaTOpathway('name')

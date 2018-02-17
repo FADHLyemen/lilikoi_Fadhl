@@ -4,7 +4,7 @@
 #' This function allows you to compute Pathway Desregulation Score deriving
 #' make sure that you have the below database for the metabolites and pathway list:
 #' meta_path.RData
-#' @param Metabolite_pathway_table from MetaTOpathway function
+#' @param qvec This is the Metabolite_pathway_table from MetaTOpathway function. This table includes the metabolites ids and the its corssponding hmdb ids 
 #' @keywords PDS
 #' @export
 #' @examples PDSmatrix= PDSfun(Metabolite_pathway_table)
