@@ -46,28 +46,53 @@ MetaTOpathway<- function(q.type, hmdb=T, pubchem=T, chebi=F, kegg=T, metlin=F){
   dataSet$q.type <<- q.type;
   if(q.type == "name"){
     y=NameMappingExact();
+	sanity_check(name.map,hit.inx) 
     return(y)
   }else{
     IDMapping(q.type);
-  }
-
-  # do some sanity check
-  todo.inx <-which(is.na(name.map$hit.inx));
-  if(length(todo.inx)/length(name.map$hit.inx) > 0.5){
-    print("Over half of the compound IDs could not be matched to our database. Please make
-          sure that correct compound IDs or common compound names are used.");
-  }else if (length(todo.inx) > 15){
-    print("There are >15 compounds without matches. You can either proceed or if necessary,
-          update these compound IDs and upload again.");
-  }else{
-    #print("Name matching OK, please inspect (and manual correct) the results then proceed.");
-    cat( (length(name.map$hit.inx)-length(todo.inx)) , "Matched "  );
-    cat("\n")
-    cat( (length(todo.inx))  , "Unmatched"  );
-
-
+	sanity_check(name.map,hit.inx) 
   }
 }
+
+  # do some sanity check
+  #' A sanity_check Function
+#'
+#' This function return how many metabolites matched and unmatched from Metatopathway function 
+#' @param name.map is the dataframe of metabolites and its corresponding ids.
+#' @param hit.inx is the status of the metabolite hits (number if the metabolites matched the database or NA otherwise.) 
+#' @keywords santiy search
+#' @export
+#' @examples sanity_check(name.map,hit.inx)
+#' sanity_check
+#'
+#'
+
+  sanity_check <- function(name.map,hit.inx){
+        
+       todo.inx <-which(is.na(name.map$hit.inx));
+       if(length(todo.inx)/length(name.map$hit.inx) > 0.5){
+            print("Over half of the compound IDs could not be matched to our database. Please make 
+                            sure that correct compound IDs or common compound names are used.");
+       }else if (length(todo.inx) > 100){
+            print("There are >100 compounds without matches. You can either proceed or if necessary, 
+                                    update these compound IDs and upload again.");        
+       }else{
+            #print("Name matching OK, please inspect (and manual correct) the results then proceed."); 
+    print( paste0( (length(name.map$hit.inx)-length(todo.inx) ), " ", "out of ",length(name.map$hit.inx) 
+             , " ","Matched metabolites"," ",
+              round((length(name.map$hit.inx)/(length(name.map$hit.inx)+length(todo.inx))),1)*100," " 
+              ,"%")  );
+           cat("\n")
+    print( paste0( (length(todo.inx) ), " ", "out of ",length(name.map$hit.inx)  
+             , " ","UnMatched metabolites"," ",
+              round((length(todo.inx)/(length(name.map$hit.inx)+length(todo.inx))),1)*100," " 
+              ,"%")  );
+                    
+       }
+    }
+	
+  
+  
 
 #' A NameMappingExact Function
 #'

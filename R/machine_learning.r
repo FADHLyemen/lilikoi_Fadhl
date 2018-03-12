@@ -28,22 +28,22 @@ performance=matrix(rep( 0, len=56), nrow = 8)  # ROC  SENS SPEC
 performance_training_list <- list()
 performance_testing_list <- list()
 
-   var.cart= list()
-   var.lda= list()
-   var.svm= list()
-   var.rf= list()
-   var.gbm= list()
-   var.pam= list()
-   var.log= list()
+  # var.cart= list()
+  # var.lda= list()
+  # var.svm= list()
+  # var.rf= list()
+  # var.gbm= list()
+  # var.pam= list()
+  # var.log= list()
 
-
+model=list()
 
   ###############Shuffle stat first
-  rand <- sample(nrow(prostate_df))
-  prostate_df=prostate_df[rand, ]
+  #rand <- sample(nrow(prostate_df))
+  #prostate_df=prostate_df[rand, ]
      
   ###############Randomly Split  the data in to training and testing 
-    set.seed(1024)
+  set.seed(2000)
   trainIndex <- createDataPartition(prostate_df$subtype, p = .8,list = FALSE,times = 1)
   irisTrain <- prostate_df[ trainIndex,]
   irisTest  <- prostate_df[-trainIndex,]
@@ -65,6 +65,7 @@ performance_testing_list <- list()
     
   garbage <- capture.output(fit.cart <- train(subtype~., data=irisTrain, method = 'rpart', trControl=control,metric="ROC"))
   #fit.cart <- train(subtype~., data=irisTrain, method = 'rpart', trControl=control,metric="ROC") #loclda 
+  model[[1]]=fit.cart
   performance_training[1,1]=max(fit.cart$results$ROC)#AUC
   performance_training[2,1]=fit.cart$results$Sens[which.max(fit.cart$results$ROC)]# sen
   performance_training[3,1]=fit.cart$results$Spec[which.max(fit.cart$results$ROC)]# spec
@@ -95,6 +96,7 @@ performance_testing_list <- list()
   garbage <- suppressWarnings(capture.output(fit.lda <- train(subtype~., data=irisTrain, method = 'lda', 
                                             trControl=control,metric="ROC",trace=F))) #loclda) 
     #fit.lda <- train(subtype~., data=irisTrain, method = 'lda', trControl=control,metric="ROC") #loclda 
+	model[[2]]=fit.lda
   performance_training[1,2]=max(fit.lda$results$ROC)#AUC
   performance_training[2,2]=fit.lda$results$Sens[which.max(fit.lda$results$ROC)]# sen
   performance_training[3,2]=fit.lda$results$Spec[which.max(fit.lda$results$ROC)]# spec
@@ -123,6 +125,7 @@ performance_testing_list <- list()
   garbage <- capture.output(fit.svm <- train(subtype~., data=irisTrain, method="svmRadial", trControl=control,metric="ROC"))
   #fit.svm <- train(subtype~., data=irisTrain, method="svmRadial", trControl=control,metric="ROC")
   #assign(paste0("fit.svm",k),train(subtype~., data=irisTrain, method="svmRadical", trControl=control,metric="ROC"))
+  model[[3]]=fit.svm
   performance_training[1,3]=max(fit.svm$results$ROC) #AUC
   performance_training[2,3]=fit.svm$results$Sens[which.max(fit.svm$results$ROC)]# sen
   performance_training[3,3]=fit.svm$results$Spec[which.max(fit.svm$results$ROC)]# spec
@@ -152,6 +155,8 @@ performance_testing_list <- list()
   set.seed(7)
   garbage <- capture.output(fit.rf <- train(subtype~., data=irisTrain, method="rf", trControl=control,metric="ROC"))
   #fit.rf <- train(subtype~., data=irisTrain, method="rf", trControl=control,metric="ROC")
+  
+  model[[4]]=fit.rf
   performance_training[1,4]=max(fit.rf$results$ROC) #AUC
   performance_training[2,4]=fit.rf$results$Sens[which.max(fit.rf$results$ROC)]# sen
   performance_training[3,4]=fit.rf$results$Spec[which.max(fit.rf$results$ROC)]# spec
@@ -181,6 +186,7 @@ performance_testing_list <- list()
  garbage <- suppressWarnings(capture.output(fit.gbm <- train(subtype~., data=irisTrain, 
                                            method="gbm", trControl=control,metric="ROC")))
  # fit.gbm <- train(subtype~., data=irisTrain, method="gbm", trControl=control,metric="ROC")
+ model[[5]]=fit.gbm
   performance_training[1,5]=max(fit.gbm$results$ROC) #AUC
   performance_training[2,5]=fit.gbm$results$Sens[which.max(fit.gbm$results$ROC)]# sen
   performance_training[3,5]=fit.gbm$results$Spec[which.max(fit.gbm$results$ROC)]# spec
@@ -209,6 +215,7 @@ performance_testing_list <- list()
   set.seed(7)
   garbage <- capture.output(fit.pam <- train(subtype~., data=irisTrain, method="pam", trControl=control,metric="ROC"))#plr) #loclda)
   #fit.pam <- train(subtype~., data=irisTrain, method="pam", trControl=control,metric="ROC")#plr
+  model[[6]]=fit.pam
   performance_training[1,6]=max(fit.pam$results$ROC) #AUC
   performance_training[2,6]=fit.pam$results$Sens[which.max(fit.pam$results$ROC)]# sen
   performance_training[3,6]=fit.pam$results$Spec[which.max(fit.pam$results$ROC)]# spec
@@ -240,6 +247,7 @@ performance_testing_list <- list()
  garbage <- suppressWarnings(capture.output(fit.log <- train(subtype~., data=irisTrain, 
                                             method="glmnet", trControl=control,metric="ROC")))
   #fit.log <- train(subtype~., data=irisTrain, method="glm", trControl=control,metric="ROC")#
+   model[[7]]=fit.log
   performance_training[1,7]=max(fit.log$results$ROC) #AUC
   performance_training[2,7]=fit.log$results$Sens[which.max(fit.log$results$ROC)]# sen
   performance_training[3,7]=fit.log$results$Spec[which.max(fit.log$results$ROC)]# spec
@@ -281,32 +289,46 @@ performance_testing_list <- list()
     
  
     
- #############plot ROC
-    
+#############plot ROC
+    smooth_method="binormal" #"density" 
 #plot(cart.ROC, col="red" )
-plot(smooth(cart.ROC,method="density"),col="red")
+#pdf("ROC.pdf",width=10,height=10)
+plot(smooth(cart.ROC,method=smooth_method),col="red",cex.lab=1.5)
+#plot(cart.ROC,col="red",print.auc=T)
 par(new=TRUE)
 #plot( lda.ROC, col="green" )
-plot(smooth(lda.ROC,method="fitdistr"),col="green")
+#plot.roc(lda.ROC,col="green",print.auc=T)
+#plot.roc(smooth(lda.ROC,method="binormal"),col="green",print.auc=T)
+#plot.roc(smooth(lda.ROC,method="density"),col="green",print.auc=T)
+#plot.roc(smooth(lda.ROC,method="fitdistr"),col="green",print.auc=T)
+#plot.roc(smooth(lda.ROC,method="logcondens"),col="green",print.auc=T)  
+plot(smooth(lda.ROC,method=smooth_method),col="green",cex.lab=1.5)
+#plot(lda.ROC,col="green",print.auc=T)
 par(new=TRUE)
 #plot(svm.ROC, col="black" )
-plot(smooth(svm.ROC,method="fitdistr"),col="black")
+plot(smooth(svm.ROC,method=smooth_method),col="black",cex.lab=1.5)
+#plot(svm.ROC,col="black",print.auc=T)
 par(new=TRUE)
 #plot(rf.ROC, col="orange" )
-plot(smooth(rf.ROC,method="fitdistr"),col="orange")
+plot(smooth(rf.ROC,method=smooth_method),col="orange",cex.lab=1.5)
+#plot(rf.ROC,col="orange",print.auc=T)
 par(new=TRUE)
 #plot(gbm.ROC, col="blue" )
-plot(smooth(gbm.ROC,method="fitdistr"),col="blue")
+plot(smooth(gbm.ROC,method=smooth_method),col="blue",cex.lab=1.5)
+#plot(gbm.ROC,col="blue",print.auc=T)
 par(new=TRUE)
 #plot( pam.ROC, col="hotpink" )
-plot(smooth(pam.ROC,method="fitdistr"),col="hotpink")
+plot(smooth(pam.ROC,method=smooth_method),col="hotpink",cex.lab=1.5)
+#plot(pam.ROC,col="hotpink",print.auc=T)
 par(new=TRUE)
 #plot(log.ROC, col="lightgoldenrod2", main="Testing ROC" )
-plot(smooth(log.ROC,method="fitdistr"),col="lightgoldenrod2",main="Testing ROC")
+plot(smooth(log.ROC,method=smooth_method),col="lightgoldenrod2",main="Testing ROC",cex.lab=1.5)
+#plot(log.ROC,col="lightgoldenrod2",main="Testing ROC",print.auc=T)
     
 legend(0.2, 0.4, legend=c('RPART','LDA','SVM','RF','GBM','PAM','LOG'), 
- col=c("red", "green","black","orange","blue","hotpink","lightgoldenrod2"), lty=1:2, cex=0.8)   
-  
+ col=c("red", "green","black","orange","blue","hotpink","lightgoldenrod2"), lty=1:2, cex=1)   
+ # dev.off()
+ 
 ######################performance plotting
 #require(ggplot)
 require(reshape2)
@@ -321,6 +343,10 @@ SENS_test=lapply(list_test, function(x) x[2,])
     
 SPEC_train=lapply(list_train, function(x) x[3,])
 SPEC_test=lapply(list_test, function(x) x[3,])
+ 
+F1_test=lapply(list_test, function(x) x[7,])
+Balanced_accuracy_test=lapply(list_test, function(x) x[8,])
+
     
 output1 <- do.call(rbind,lapply(AUC_train,matrix,ncol=7,byrow=TRUE))
 output2 <- do.call(rbind,lapply(AUC_test,matrix,ncol=7,byrow=TRUE))
@@ -331,6 +357,8 @@ output4 <- do.call(rbind,lapply(SENS_test,matrix,ncol=7,byrow=TRUE))
 output5 <- do.call(rbind,lapply(SPEC_train,matrix,ncol=7,byrow=TRUE))
 output6 <- do.call(rbind,lapply(SPEC_test,matrix,ncol=7,byrow=TRUE))
 
+output7 <- do.call(rbind,lapply(F1_test,matrix,ncol=7,byrow=TRUE))
+output8 <- do.call(rbind,lapply(Balanced_accuracy_test,matrix,ncol=7,byrow=TRUE))
     
 AUC_train_mean=apply(output1,2,mean)
 AUC_test_mean=apply(output2,2,mean)
@@ -345,19 +373,79 @@ SPEC_train_mean=apply(output5,2,mean)
 SPEC_test_mean=apply(output6,2,mean)
 SPEC=data.frame(SPEC=t(cbind(t(SPEC_train_mean),t(SPEC_test_mean))))
 
+F1_test_mean=apply(output7,2,mean)
+F1=data.frame(F1=t(t(F1_test_mean)))
+    
+Balanced_accuracy_test_mean=apply(output8,2,mean)
+Balanced_accuracy=data.frame(Balanced_accuracy=t(t(Balanced_accuracy_test_mean)))
+
+
 trainingORtesting=t(cbind(t(rep("training",7)),t(rep("testing",7))))
+testing_only=t(t(rep("testing",7)))
+    
 performance_data=data.frame(AUC=AUC,SENS=SENS,SPEC=SPEC,trainingORtesting,    
                    Algorithm=(rep(t(c('RPART','LDA','SVM','RF','GBM','PAM','LOG')),2)) )
+    
+performance_data_test=data.frame(AUC=data.frame(AUC=t((t(AUC_test_mean)))),
+                                 SENS=data.frame(SENS=t((t(SENS_test_mean)))),
+                                 SPEC=data.frame(SPEC=t((t(SPEC_test_mean)))),
+                                 F1=F1,
+                                 Balanced_accuracy=Balanced_accuracy
+                ,testing_only,Algorithm=(rep(t(c('RPART','LDA','SVM','RF','GBM','PAM','LOG')),1)) )
+
+#print(performance_data_test) 
+    
 #performance_data   
 melted_performance_data=suppressMessages(melt(performance_data)   )
+melted_performance_data_test=suppressMessages(melt(performance_data_test)   )
 #melted_performance_data  
+
+  #  pdf("pdf1.pdf",width=10,height=10)
 p1=ggplot(data=melted_performance_data[trainingORtesting=='training',], aes(x=Algorithm, y=value,fill=variable)) + 
-geom_bar(stat="identity",position=position_dodge()) +ylab("")+ggtitle("Training")+theme(plot.title = element_text(hjust = 0.5))+
-    labs(fill="")
+geom_bar(stat="identity",position=position_dodge()) +xlab("")+ylab("")+ggtitle("Training")+theme(plot.title = element_text(hjust = 0.5)
+    ,axis.text=element_text(size=15,face="bold"),axis.title=element_text(size=14,face="bold"))+labs(fill="")
 print(p1)
     
+   # dev.off()
+    
+    # pdf("pdf2.pdf",width=10,height=10)
 p2=ggplot(data=melted_performance_data[trainingORtesting=='testing',], aes(x=Algorithm, y=value,fill=variable)) + 
-geom_bar(stat="identity",position=position_dodge()) +ylab("")+ggtitle("Testing")+theme(plot.title = element_text(hjust = 0.5))+
-    labs(fill="")
+geom_bar(stat="identity",position=position_dodge()) +xlab("")+ylab("")+ggtitle("Testing")+theme(plot.title = element_text(hjust = 0.5)
+    ,axis.text=element_text(size=15,face="bold"),axis.title=element_text(size=14,face="bold"))+labs(fill="")
  print(p2)
+    #dev.off()
+    
+     #pdf("pdf3.pdf",width=10,height=10)
+p3=ggplot(data=melted_performance_data_test, aes(x=Algorithm, y=value,fill=variable)) + 
+geom_bar(stat="identity",position=position_dodge()) +xlab("")+ylab("")+ggtitle("Testing")+theme(plot.title = element_text(hjust = 0.5)
+    ,axis.text=element_text(size=10,face="bold"),axis.title=element_text(size=14,face="bold"))+labs(fill="")
+ print(p3)
+    #dev.off()
+    
+    #Which algorithm performs better based on the its AUC on testing
+   
+    res=list()
+    res$models=model
+    res$performance=performance_testing
+    res$train_inx= trainIndex
+    #res$melted_performance_data_test= melted_performance_data_test
+    #print the performance metrics for the best algorithms
+    best_model=res$models[which.max(res$performance[1,])] # the best model has the high AUC
+    method=(unlist(best_model)[[1]])
+    
+    if (method=='glmnet'){method='log'}
+    if (method=='svmRadial'){method='svm'}
+    
+#pdf("best_model_performance.pdf",width=10,height=10)
+    dd=filter(melted_performance_data_test,Algorithm==toupper(method))
+    p4=ggplot(data=dd, aes(x=Algorithm, y=value,fill=variable)) + 
+    geom_bar(stat="identity",position=position_dodge()) +xlab("")+ylab("")+ggtitle("Testing")+theme(plot.title = element_text(hjust = 0.5)
+    ,axis.text=element_text(size=15,face="bold"),axis.title=element_text(size=14,face="bold"))+labs(fill="")
+    print(p4)
+    
+#dev.off()
+    
+      
+    return(res)
+	
     }

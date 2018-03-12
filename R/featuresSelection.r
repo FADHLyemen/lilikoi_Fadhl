@@ -45,10 +45,14 @@ featuresSelection <- function(PDSmatrix,threshold= 0.5,method="info"){
                         name = reorder(name,order(I.R.paireddiagnosis, decreasing = TRUE)))
   #theTable
 
-  p=ggplot(theTable,aes(x=name,y=I.R.paireddiagnosis))+
-    geom_bar(stat="identity") +
-    theme(axis.text.x=element_text(angle=30,hjust=1,vjust=1))+xlab("Pathways")+ylab("Mutual Information")
-  plot(p)
+  p <- ggplot(theTable, aes(name, I.R.paireddiagnosis)) + geom_col() + xlab(NULL) +
+  ylab(NULL) 
+
+p + theme(axis.text.x = element_text(angle = 90))
+p + coord_flip()
+q <- p + aes(stringr::str_wrap(name, 20), I.R.paireddiagnosis) + ylab("Mutual information") +
+  xlab("Pathways")
+plot(q + coord_flip())
   #legend("topright",legend=names(I.R.paireddiagnosis[order(I.R.paireddiagnosis,decreasing=T)])[-1], border=FALSE, cex=0.7)
 
   return(selected_pathways)
