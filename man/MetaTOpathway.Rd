@@ -8,7 +8,7 @@ MetaTOpathway(q.type, hmdb = T, pubchem = T, chebi = F, kegg = T,
   metlin = F)
 }
 \arguments{
-\item{The}{type of the metabolites id (name,kegg,hmdb,pubchem)}
+\item{q.type}{The type of the metabolites id such as 'name', 'kegg', 'hmdb','pubchem'}
 }
 \description{
 This function allows you to convert your metabolites id such as names, kegg ids, pubchem ids.

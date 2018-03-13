@@ -4,7 +4,7 @@
 \alias{machine_learning}
 \title{A machine learning Function}
 \usage{
-machine_learning(PDSmatrix, selected_Pathways_Weka, ROC_smoth = FALSE)
+machine_learning(PDSmatrix, selected_Pathways_Weka)
 }
 \arguments{
 \item{PDSmatrix}{from PDSfun function and selected_Pathways_Weka from featuresSelection function}

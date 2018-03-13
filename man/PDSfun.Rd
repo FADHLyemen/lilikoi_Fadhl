@@ -7,7 +7,7 @@
 PDSfun(qvec)
 }
 \arguments{
-\item{Metabolite_pathway_table}{from MetaTOpathway function}
+\item{qvec}{This is the Metabolite_pathway_table from MetaTOpathway function. This table includes the metabolites ids and the its corssponding hmdb ids}
 }
 \description{
 This function allows you to compute Pathway Desregulation Score deriving
