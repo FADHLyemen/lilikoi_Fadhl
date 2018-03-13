@@ -36,7 +36,7 @@ ROC_pathway <- roc(predictor=as.numeric(unlist(cartClasses[[1]][1])),
 smooth_method="binormal" 
  
  #pdf("factors.pdf",width=10,height=10)   
-plot(smooth(ROC_pathway,method=smooth_method),col="black",cex.lab=1.5)
+plot(pROC::smooth(ROC_pathway,method=smooth_method),col="black",cex.lab=1.5)
 #plot(ROC_pathway,col="black")
 par(new=TRUE)
 train_index=result$train_inx
@@ -46,14 +46,14 @@ colnames(factor_data)[which(names(factor_data) == "Label")]='subtype'
 
 ROC_factor=createthemodel( factor_data,train_index,method)
     
-plot(smooth(ROC_factor$ROC,method=smooth_method),col="red",cex.lab=1.5)
+plot(pROC::smooth(ROC_factor$ROC,method=smooth_method),col="red",cex.lab=1.5)
 #plot(ROC_factor,col="red",print.auc=T)
 par(new=TRUE)
 
 pathway_factors_data=cbind(factor_data[-1],prostate_df)
     #print(head(pathway_factors_data))
 ROC_pathway_factors=createthemodel(pathway_factors_data,train_index,method)
-plot(smooth(ROC_pathway_factors$ROC,method=smooth_method),col="blue",cex.lab=1.5)
+plot(pROC::smooth(ROC_pathway_factors$ROC,method=smooth_method),col="blue",cex.lab=1.5)
 
 #plot(ROC_pathway_factors,col="blue") 
     
