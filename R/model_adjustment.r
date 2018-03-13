@@ -75,7 +75,7 @@ all_corr=rcorr(as.matrix(df),type="pearson")
         ,addrect = 4)
     #dev.off()
 
-  
+  }
     
  
 
@@ -114,4 +114,3 @@ createthemodel <-function(data,train_index,method){
     return(res)
     
  }
-    }
