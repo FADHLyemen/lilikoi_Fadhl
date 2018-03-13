@@ -77,7 +77,7 @@ all_corr=rcorr(as.matrix(df),type="pearson")
 
   
     
-    }
+ 
 
 #' create the model using caret package 
 #'
@@ -114,3 +114,4 @@ createthemodel <-function(data,train_index,method){
     return(res)
     
  }
+    }
