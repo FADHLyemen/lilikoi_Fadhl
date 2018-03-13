@@ -33,7 +33,8 @@ cartConfusion=confusionMatrix(data = unlist(cartClasses1), irisTest$subtype)
 ROC_pathway <- roc(predictor=as.numeric(unlist(cartClasses[[1]][1])),
                    response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
 #plot(smooth(ROC,method="fitdistr"),print.auc=TRUE,col="green")
-smooth_method="binormal" 
+smooth_method="density" #"binormal" 
+ 
  #pdf("factors.pdf",width=10,height=10)   
 plot(smooth(ROC_pathway,method=smooth_method),col="black",cex.lab=1.5)
 #plot(ROC_pathway,col="black")
@@ -53,6 +54,7 @@ pathway_factors_data=cbind(factor_data[-1],prostate_df)
     #print(head(pathway_factors_data))
 ROC_pathway_factors=createthemodel(pathway_factors_data,train_index,method)
 plot(smooth(ROC_pathway_factors$ROC,method=smooth_method),col="blue",cex.lab=1.5)
+
 #plot(ROC_pathway_factors,col="blue") 
     
  legend(0.5, 0.4, legend=c('Selected Pathways','Clinical factors','Selected pathways + clinical factors'), 
