@@ -51,6 +51,7 @@ plot(pROC::smooth(ROC_factor$ROC,method=smooth_method),col="red",cex.lab=1.5)
 par(new=TRUE)
 
 pathway_factors_data=cbind(factor_data[-1],prostate_df)
+colnames(pathway_factors_data)[which(names(pathway_factors_data) == "Label")]='subtype'
     #print(head(pathway_factors_data))
 ROC_pathway_factors=createthemodel(pathway_factors_data,train_index,method)
 plot(pROC::smooth(ROC_pathway_factors$ROC,method=smooth_method),col="blue",cex.lab=1.5)
