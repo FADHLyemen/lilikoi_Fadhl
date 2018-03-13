@@ -16,7 +16,7 @@
 #'
 
 model_adjustment <-function(result,PDSmatrix,selected_Pathways_Weka,clinical_factors_data,factors){
-    
+ require(pROC)   
 prostate_df=data.frame(t((PDSmatrix[selected_Pathways_Weka,])),Label=Metadata$Label, check.names=T)
 colnames(prostate_df)[which(names(prostate_df) == "Label")]='subtype'
 irisTrain <- prostate_df[ result$train_inx,]
