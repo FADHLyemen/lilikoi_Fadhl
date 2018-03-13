@@ -273,8 +273,8 @@ model=list()
   performance_testing_list[[1]] <- performance_testing
   performance_training_list[[1]] <- performance_training
     
-  performance_training=matrix( rep( 0, len=21), nrow = 3)  #AUC   SENS    SPECF
-  performance_testing=matrix( rep( 0, len=56), nrow = 8)  # ROC  SENS SPEC
+  #performance_training=matrix( rep( 0, len=21), nrow = 3)  #AUC   SENS    SPECF
+  #performance_testing=matrix( rep( 0, len=56), nrow = 8)  # ROC  SENS SPEC
        
 
  #####plot the variable importance
