@@ -33,7 +33,7 @@ cartConfusion=confusionMatrix(data = unlist(cartClasses1), irisTest$subtype)
 ROC_pathway <- roc(predictor=as.numeric(unlist(cartClasses[[1]][1])),
                    response=irisTest$subtype,levels=rev(levels(irisTest$subtype)))
 #plot(smooth(ROC,method="fitdistr"),print.auc=TRUE,col="green")
-smooth_method="density" #"binormal" 
+smooth_method= "fitdistr" 
  
  #pdf("factors.pdf",width=10,height=10)   
 plot(smooth(ROC_pathway,method=smooth_method),col="black",cex.lab=1.5)
