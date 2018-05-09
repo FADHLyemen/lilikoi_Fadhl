@@ -1,5 +1,3 @@
-source("https://bioconductor.org/biocLite.R")
-biocLite("pathifier")
 install.packages("tidyverse")
 install.packages("rmarkdown")
 install.packages("ggplot2") 
@@ -18,3 +16,7 @@ install.packages("glmnet")
 install.packages("gbm")
 install.packages("e1071")
 install.packages("pamr")
+install.packages("rJava")
+source("https://bioconductor.org/biocLite.R")
+biocLite("pathifier")
+#sudo R CMD javareconf
