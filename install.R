@@ -1,3 +1,5 @@
+source("https://bioconductor.org/biocLite.R")
+biocLite("pathifier")
 install.packages("tidyverse")
 install.packages("rmarkdown")
 install.packages("ggplot2") 
