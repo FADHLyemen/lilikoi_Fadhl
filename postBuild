@@ -1,1 +1,4 @@
 #R CMD javareconf
+library(rJava)
+.jinit()
+.jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
