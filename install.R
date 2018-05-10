@@ -5,7 +5,7 @@
 #install.packages("devtools")
 #install.packages("dplyr")
 install.packages("rJava",,"http://rforge.net/",type="source")
-install.packages("RWeka")
+#install.packages("RWeka")
 #install.packages("infotheo")
 #install.packages("pROC")
 #install.packages("reshape2")
