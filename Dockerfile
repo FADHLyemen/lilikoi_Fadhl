@@ -2,7 +2,7 @@ FROM andrewosh/binder-base
 USER root
 ENTRYPOINT "/bin/sh"
 
-ADD sayhi.sh
+ADD sayhi.sh /usr/local/
 
 ADD verify verify
 
