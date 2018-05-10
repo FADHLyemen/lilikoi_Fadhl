@@ -9,6 +9,6 @@ USER root
 
 #RUN add-apt-repository ppa:openjdk-r/ppa  
 RUN apt-get update   
-#RUN apt-get install openjdk-7-jdk 
+RUN apt-get install openjdk-7-jdk 
 
 
