@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 RUN apt-get update
 #RUN apt-get install software-properties-common -y
 #RUN add-apt-repository ppa:webupd8team/java -y
-RUN -E add-apt-repository ppa:openjdk-r/ppa 
+RUN add-apt-repository ppa:openjdk-r/ppa 
 RUN apt-get update
 RUN apt-get install openjdk-8-jdk
 #RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
