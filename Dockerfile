@@ -1,14 +1,10 @@
-FROM andrewosh/binder-base
-USER root
-#ENTRYPOINT "/bin/sh"
+FROM ubuntu:14.04
 
-#ADD sayhi.sh /usr/local/
-
-#ADD verify verify
-
-#RUN ENV DEBIAN_FRONTEND noninteractive
-RUN add-apt-repository ppa:openjdk-r/ppa -y  
-RUN apt-get update -y  
-RUN apt-get install openjdk-7-jdk -y
+RUN apt-get update
+RUN apt-get install software-properties-common -y
+RUN add-apt-repository ppa:webupd8team/java -y
+RUN apt-get update
+RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+RUN apt-get install oracle-java7-installer -y
 
 
