@@ -1,3 +1,2 @@
--f
 -repository ppa:openjdk-r/ppa  
 openjdk-7-jre
