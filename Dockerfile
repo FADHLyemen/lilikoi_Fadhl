@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
 RUN apt-get update
-#RUN apt-get install software-properties-common -y
+RUN apt-get install software-properties-common -y
 #RUN add-apt-repository ppa:webupd8team/java -y
 RUN add-apt-repository ppa:openjdk-r/ppa 
 RUN apt-get update
