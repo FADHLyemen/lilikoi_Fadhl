@@ -1,5 +1,6 @@
 FROM andrewosh/binder-base
 USER root
+RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install software-properties-common
 
 RUN apt-get update
