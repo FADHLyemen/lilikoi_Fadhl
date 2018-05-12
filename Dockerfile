@@ -3,7 +3,7 @@
 FROM jupyter/datascience-notebook:160eb5183ace
 #FROM jupyter/base-notebook:b4dd11e16ae4
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
-#USER root
+USER root
 # Make ~/.R
 #RUN mkdir -p $HOME/.R
 RUN pip install --no-cache-dir notebook==5.*
