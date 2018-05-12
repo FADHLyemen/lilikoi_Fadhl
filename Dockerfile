@@ -1,5 +1,6 @@
-FROM andrewosh/binder-base:latest
+#FROM andrewosh/binder-base:latest
 #FROM rocker/tidyverse:latest
+FROM jupyter/base-notebook:b4dd11e16ae4
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
 USER root
 # Make ~/.R
