@@ -9,14 +9,14 @@ USER root
 RUN pip install --no-cache-dir notebook==5.*
 # Specify the default command to run
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
-ENV NB_USER jovyan
-ENV NB_UID 1000
-ENV HOME /home/${NB_USER}
+#ENV NB_USER jovyan
+#ENV NB_UID 1000
+#ENV HOME /home/${NB_USER}
 
-RUN adduser --disabled-password \
-    --gecos "Default user" \
-    --uid ${NB_UID} \
-    ${NB_USER}
+#RUN adduser --disabled-password \
+ #   --gecos "Default user" \
+ #   --uid ${NB_UID} \
+ #   ${NB_USER}
 	
 # $HOME doesn't exist in the COPY shell, so be explicit
 #COPY R/Makevars /root/.R/Makevars
