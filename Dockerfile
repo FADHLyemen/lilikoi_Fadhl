@@ -37,7 +37,7 @@ RUN apt-get update -qq \
         #forecast prophet lime sparklyr h2o rsparkling unbalanced \
         #formattable httr rvest xml2 jsonlite \
         #textclean naniar writexl \
-	R install.packages("rJava) \
+	R install.packages("rJava") \
    # && Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))' \
    # && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
  # && rm -rf /var/lib/apt/lists/*               *
