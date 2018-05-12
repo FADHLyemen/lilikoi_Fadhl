@@ -1,6 +1,6 @@
 #FROM andrewosh/binder-base:latest
 #FROM rocker/tidyverse:latest
-FROM rocker/r-base
+FROM cardcorp/r-java
 #FROM jupyter/base-notebook:b4dd11e16ae4
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
 #USER root
