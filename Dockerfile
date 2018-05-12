@@ -1,4 +1,4 @@
-FROM andrewosh/binder-base
+FROM andrewosh/binder-base:latest
 #FROM rocker/tidyverse:latest
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
 USER root
