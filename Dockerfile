@@ -1,6 +1,7 @@
 FROM andrewosh/binder-base
 #FROM rocker/tidyverse:latest
-LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
+#LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
+USER root
 # Make ~/.R
 RUN mkdir -p $HOME/.R
 # $HOME doesn't exist in the COPY shell, so be explicit
