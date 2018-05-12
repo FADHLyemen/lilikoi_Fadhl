@@ -1,4 +1,5 @@
-FROM rocker/tidyverse:latest
+FROM andrewosh/binder-base
+#FROM rocker/tidyverse:latest
 LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
 # Make ~/.R
 RUN mkdir -p $HOME/.R
