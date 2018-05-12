@@ -1,8 +1,9 @@
 #FROM andrewosh/binder-base:latest
 #FROM rocker/tidyverse:latest
-FROM jupyter/base-notebook:b4dd11e16ae4
+FROM rocker/r-base
+#FROM jupyter/base-notebook:b4dd11e16ae4
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
-USER root
+#USER root
 # Make ~/.R
 RUN mkdir -p $HOME/.R
 # $HOME doesn't exist in the COPY shell, so be explicit
