@@ -1,58 +1,27 @@
-#FROM andrewosh/binder-base:latest
-#FROM mertnuhoglu/rjava_shiny:latest
-#FROM jupyter/datascience-notebook:160eb5183ace
-#FROM rocker/tidyverse:latest
-#FROM jupyter/base-notebook:b4dd11e16ae4
-FROM joao-parana/r-java:latest
-MAINTAINER "João Antonio Ferreira" <joao.parana@gmail.com>
-#LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
-#USER root
-#RUN apt-get install openjdk-7-jdk
-#RUN apt-get install software-properties-common
-#RUN apt-get install -f
-#RUN add-apt-repository ppa:openjdk-r/ppa  
-#RUN apt-get update
-#RUN apt-get install openjdk-7-jre
+FROM parana/r-base:latest
 
-# Make ~/.R
-#RUN mkdir -p $HOME/.R
-#RUN pip install --no-cache-dir notebook==5.*
-# Specify the default command to run
-#CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
-#ENV NB_USER jovyan
-#ENV NB_UID 1000
-#ENV HOME /home/${NB_USER}
+# Based on https://github.com/cardcorp/card-rocker image
+MAINTAINER "João Antonio Ferreira" <joao.parana@gmail.com>`
 
-#RUN adduser --disabled-password \
-#    --gecos "Default user" \
-#    --uid ${NB_UID} \
-#    ${NB_USER}
-	
-# $HOME doesn't exist in the COPY shell, so be explicit
-#COPY R/Makevars /root/.R/Makevars
-#RUN apt-get update\
- #   && apt-get -y --no-install-recommends install \
- #   liblzma-dev \
- #   libbz2-dev \
-  #  clang  \
-   # ccache \
-   # default-jdk \
-   # default-jre \
-#	&& apt-get install r-cran-rjava\
- #  && R CMD javareconf \
-   #&& install2.r --error \
-    #    ggstance ggrepel ggthemes \
-        ###My packages are below this line
-        #tidytext janitor corrr officer devtools pacman \
-        #tidyquant timetk tibbletime sweep broom prophet \
-        #forecast prophet lime sparklyr h2o rsparkling unbalanced \
-        #formattable httr rvest xml2 jsonlite \
-        #textclean naniar writexl \
-		#rJava \
-	#&& R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" \
-	 #&& R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org',type=source)" 
-   # && Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))' \
-   # && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
- # && rm -rf /var/lib/apt/lists/*               *
+ENV REFRESHED_AT 2016-08-06
 
+RUN apt-get update && apt-get upgrade -y gnupg
 
+## Install Java 
+RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
+      | tee /etc/apt/sources.list.d/webupd8team-java.list \
+    &&  echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
+      | tee -a /etc/apt/sources.list.d/webupd8team-java.list \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886 \
+    && echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" \
+        | /usr/bin/debconf-set-selections \
+    && apt-get update \
+    && apt-get install -y oracle-java8-installer \
+    && update-alternatives --display java \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean \
+    && R CMD javareconf
+
+## Install rJava package
+RUN install2.r --error rJava \
+  && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
