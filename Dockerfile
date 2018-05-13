@@ -27,7 +27,7 @@ USER root
 	
 # $HOME doesn't exist in the COPY shell, so be explicit
 #COPY R/Makevars /root/.R/Makevars
-RUN apt-get update -qq \
+RUN apt-get update -y \
     && apt-get -y --no-install-recommends install \
     liblzma-dev \
     libbz2-dev \
