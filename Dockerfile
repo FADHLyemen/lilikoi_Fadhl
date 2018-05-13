@@ -1,10 +1,11 @@
 #FROM andrewosh/binder-base:latest
-FROM mertnuhoglu/rjava_shiny:latest
-FROM jupyter/datascience-notebook:160eb5183ace
+#FROM mertnuhoglu/rjava_shiny:latest
+#FROM jupyter/datascience-notebook:160eb5183ace
 #FROM rocker/tidyverse:latest
 #FROM jupyter/base-notebook:b4dd11e16ae4
+FROM joao-parana/r-java:latest
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
-USER root
+#USER root
 #RUN apt-get install openjdk-7-jdk
 #RUN apt-get install software-properties-common
 #RUN apt-get install -f
@@ -28,15 +29,16 @@ USER root
 	
 # $HOME doesn't exist in the COPY shell, so be explicit
 #COPY R/Makevars /root/.R/Makevars
-RUN apt-get update\
-    && apt-get -y --no-install-recommends install \
-    liblzma-dev \
-    libbz2-dev \
-    clang  \
-    ccache \
-    default-jdk \
-    default-jre \
-   && R CMD javareconf \
+#RUN apt-get update\
+ #   && apt-get -y --no-install-recommends install \
+ #   liblzma-dev \
+ #   libbz2-dev \
+  #  clang  \
+   # ccache \
+   # default-jdk \
+   # default-jre \
+#	&& apt-get install r-cran-rjava\
+ #  && R CMD javareconf \
    #&& install2.r --error \
     #    ggstance ggrepel ggthemes \
         ###My packages are below this line
@@ -47,7 +49,7 @@ RUN apt-get update\
         #textclean naniar writexl \
 		#rJava \
 	#&& R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" \
-	 && R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" 
+	 #&& R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org',type=source)" 
    # && Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))' \
    # && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
  # && rm -rf /var/lib/apt/lists/*               *
