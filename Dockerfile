@@ -20,6 +20,6 @@ RUN apt-get update -qq \
     ccache \
     default-jdk \
     default-jre \
-    && R CMD javareconf 
+    && R CMD javareconf\ 
 	
-#RUN Rscript -e "install.packages('rJava',,'http://www.rforge.net/')"
+   && Rscript -e "install.packages('rJava',,'http://www.rforge.net/')"
