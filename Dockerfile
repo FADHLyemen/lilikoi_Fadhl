@@ -4,6 +4,7 @@
 #FROM rocker/tidyverse:latest
 #FROM jupyter/base-notebook:b4dd11e16ae4
 FROM joao-parana/r-java:latest
+MAINTAINER "João Antonio Ferreira" <joao.parana@gmail.com>
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
 #USER root
 #RUN apt-get install openjdk-7-jdk
