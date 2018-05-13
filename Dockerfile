@@ -22,4 +22,4 @@ RUN apt-get update -qq \
     default-jre \
     && R CMD javareconf\ 
 	
-   && Rscript -e "install.packages('rJava',,'http://www.rforge.net/')"
+   && Rscript -e "install.packages('rJava',type = 'source', repos='http://cran.rstudio.com/' )"
