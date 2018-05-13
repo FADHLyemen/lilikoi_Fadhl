@@ -1,5 +1,5 @@
 FROM jupyter/datascience-notebook:1085ca054a5f
-RUN pip install --no-cache-dir notebook==5.*
+#RUN pip install --no-cache-dir notebook==5.*
 
 # Make sure the contents of our repo are in ${HOME}
 COPY . ${HOME}
