@@ -20,6 +20,6 @@ RUN apt-get update -qq \
     ccache \
     default-jdk \
     default-jre \
-    && R CMD javareconf\ 
-	&& ln -f -s $(/usr/libexec/java_home)/jre/lib/server/libjvm.dylib /usr/local/lib\
-   && Rscript -e "install.packages('rJava',type = 'source', repos='http://cran.rstudio.com/' )"
+    && R CMD javareconf
+	#&& ln -f -s $(/usr/libexec/java_home)/jre/lib/server/libjvm.dylib /usr/local/lib\
+   #&& Rscript -e "install.packages('rJava',type = 'source', repos='http://cran.rstudio.com/' )"
