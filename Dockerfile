@@ -3,7 +3,7 @@ FROM andrewosh/binder-base:latest
 #FROM jupyter/datascience-notebook:160eb5183ace
 #FROM jupyter/base-notebook:b4dd11e16ae4
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
-USER root
+#USER root
 #RUN apt-get install openjdk-7-jdk
 #RUN apt-get install software-properties-common
 #RUN apt-get install -f
@@ -27,7 +27,7 @@ USER root
 	
 # $HOME doesn't exist in the COPY shell, so be explicit
 #COPY R/Makevars /root/.R/Makevars
-RUN apt-get update -y \
+RUN apt-get update\
     && apt-get -y --no-install-recommends install \
     liblzma-dev \
     libbz2-dev \
