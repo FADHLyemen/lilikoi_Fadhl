@@ -47,7 +47,7 @@ FROM jupyter/datascience-notebook:160eb5183ace
         #textclean naniar writexl \
 		#rJava \
 	#&& R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" \
-	&& RUN R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" 
+	 RUN R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" 
    # && Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))' \
    # && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
  # && rm -rf /var/lib/apt/lists/*               *
