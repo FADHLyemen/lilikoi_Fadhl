@@ -10,7 +10,7 @@ USER ${NB_USER}
 # Specify the default command to run
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
 
-#USER root
+USER root
 RUN apt-get install default-jre
 RUN apt-get install default-jdk
 RUN R CMD javareconf
