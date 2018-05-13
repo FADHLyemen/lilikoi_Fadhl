@@ -43,7 +43,11 @@ RUN apt-get update -qq \
 			 r-glmnet\
 			 r-gbm\
 			 r-e1071\
-			 r-pamr
+			 r-pamr\
+			 conda clean -tipsy && \
+             fix-permissions $CONDA_DIR\
+	&& conda install -c glaxosmithkline r-rweka 
+
 			 #source("https://bioconductor.org/biocLite.R")
 #biocLite("pathifier")	 
 
