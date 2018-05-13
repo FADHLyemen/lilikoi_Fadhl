@@ -32,7 +32,7 @@ RUN apt-get update -qq \
 			 r-caret\
 			 r-devtools\
 			 r-dplyr\
-			 r-RWeka\
+			 #r-RWeka\
 			 r-infotheo\
 			 r-pROC\
 			 r-reshape2\
