@@ -9,3 +9,6 @@ USER ${NB_USER}
 
 # Specify the default command to run
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
+
+
+RUN install2.r --error rJava
