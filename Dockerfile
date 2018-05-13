@@ -24,4 +24,7 @@ RUN apt-get update -qq \
 	&& apt-get install r-cran-rjava -y\
 	&& apt-get install libgdal1-dev libproj-dev -y\
 	#&& ln -f -s $(/usr/libexec/java_home)/jre/lib/server/libjvm.dylib /usr/local/lib\
-    && Rscript -e "install.packages('rJava',type = 'source', repos='http://cran.rstudio.com/' )"
+	&& conda install --quiet --yes \
+    'r-rJava=0.9-9' 
+	
+    #&& Rscript -e "install.packages('rJava',type = 'source', repos='http://cran.rstudio.com/' )"
