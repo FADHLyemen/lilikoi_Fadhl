@@ -21,7 +21,7 @@ RUN apt-get update -qq \
     default-jdk \
     default-jre \
     && R CMD javareconf\
-	&& apt-get install r-cran-rjava\
-	&& apt-get install libgdal1-dev libproj-dev\
+	&& apt-get install r-cran-rjava -y\
+	&& apt-get install libgdal1-dev libproj-dev -y\
 	#&& ln -f -s $(/usr/libexec/java_home)/jre/lib/server/libjvm.dylib /usr/local/lib\
     && Rscript -e "install.packages('rJava',type = 'source', repos='http://cran.rstudio.com/' )"
