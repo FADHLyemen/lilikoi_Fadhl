@@ -15,7 +15,7 @@ USER root
 #RUN mkdir -p $HOME/.R
 RUN pip install --no-cache-dir notebook==5.*
 # Specify the default command to run
-CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
+#CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
 #ENV NB_USER jovyan
 #ENV NB_UID 1000
 #ENV HOME /home/${NB_USER}
