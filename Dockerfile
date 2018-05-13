@@ -1,9 +1,9 @@
-FROM andrewosh/binder-base:latest
-#FROM rocker/tidyverse:latest
+#FROM andrewosh/binder-base:latest
+FROM rocker/tidyverse:latest
 #FROM jupyter/datascience-notebook:160eb5183ace
 #FROM jupyter/base-notebook:b4dd11e16ae4
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
-USER root
+#USER root
 #RUN apt-get install openjdk-7-jdk
 #RUN apt-get install software-properties-common
 #RUN apt-get install -f
@@ -44,7 +44,7 @@ RUN apt-get update\
         #forecast prophet lime sparklyr h2o rsparkling unbalanced \
         #formattable httr rvest xml2 jsonlite \
         #textclean naniar writexl \
-		rJava \
+		#rJava \
 	#&& R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" \
    # && Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))' \
    # && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
