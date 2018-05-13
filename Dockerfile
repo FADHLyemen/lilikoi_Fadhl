@@ -11,5 +11,7 @@ USER ${NB_USER}
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
 
 #USER root
-#RUN apt-get install r-cran-rjava
+RUN apt-get install default-jre
+RUN apt-get install default-jdk
+RUN R CMD javareconf
 RUN Rscript -e "install.packages('rJava',,'http://www.rforge.net/')"
