@@ -24,14 +24,28 @@ RUN apt-get update -qq \
 	&& apt-get install r-cran-rjava -y\
 	&& apt-get install libgdal1-dev libproj-dev -y\
 	#&& ln -f -s $(/usr/libexec/java_home)/jre/lib/server/libjvm.dylib /usr/local/lib\
-	&& conda install -c r r-rjava\
-	&& install2.r --error \
-        ggstance ggrepel ggthemes \
-        ###My packages are below this line
-        tidytext janitor corrr officer devtools pacman \
-        tidyquant timetk tibbletime sweep broom prophet \
-        forecast prophet lime sparklyr h2o rsparkling unbalanced \
-        formattable httr rvest xml2 jsonlite \
-        textclean naniar writexl \
+	&& conda install -c r \
+	         r-rjava\
+			 r-tidyverse\
+			 r-rmarkdown\
+			 r-ggplot2\ 
+			 r-caret\
+			 r-devtools\
+			 r-dplyr\
+			 r-RWeka\
+			 r-infotheo\
+			 r-pROC\
+			 r-reshape2\
+			 r-corrplot\
+			 r-Hmisc\
+			 r-Matrix\
+			 r-randomForest\
+			 r-glmnet\
+			 r-gbm\
+			 r-e1071\
+			 r-pamr\
+			 #source("https://bioconductor.org/biocLite.R")
+#biocLite("pathifier")	 
+
 	
     #&& Rscript -e "install.packages('rJava',type = 'source', repos='http://cran.rstudio.com/' )"
