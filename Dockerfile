@@ -28,15 +28,15 @@ FROM jupyter/datascience-notebook:160eb5183ace
 	
 # $HOME doesn't exist in the COPY shell, so be explicit
 #COPY R/Makevars /root/.R/Makevars
-#RUN apt-get update\
- #   && apt-get -y --no-install-recommends install \
- #   liblzma-dev \
-  #  libbz2-dev \
-   # clang  \
-   # ccache \
-    #default-jdk \
-    #default-jre \
-   #&& R CMD javareconf \
+RUN apt-get update\
+    && apt-get -y --no-install-recommends install \
+    liblzma-dev \
+    libbz2-dev \
+    clang  \
+    ccache \
+    default-jdk \
+    default-jre \
+   && R CMD javareconf \
    #&& install2.r --error \
     #    ggstance ggrepel ggthemes \
         ###My packages are below this line
@@ -47,7 +47,7 @@ FROM jupyter/datascience-notebook:160eb5183ace
         #textclean naniar writexl \
 		#rJava \
 	#&& R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" \
-	 RUN R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" 
+	 && R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" 
    # && Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))' \
    # && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
  # && rm -rf /var/lib/apt/lists/*               *
