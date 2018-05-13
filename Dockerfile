@@ -11,4 +11,5 @@ USER ${NB_USER}
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
 
 
-RUN install2.r --error rJava
+RUN apt-get install r-cran-rjava
+RUN Rscript -e "install.packages('rJava')"
