@@ -36,7 +36,7 @@ FROM jupyter/datascience-notebook:160eb5183ace
    # ccache \
     #default-jdk \
     #default-jre \
-   && R CMD javareconf \
+   #&& R CMD javareconf \
    #&& install2.r --error \
     #    ggstance ggrepel ggthemes \
         ###My packages are below this line
@@ -46,7 +46,8 @@ FROM jupyter/datascience-notebook:160eb5183ace
         #formattable httr rvest xml2 jsonlite \
         #textclean naniar writexl \
 		#rJava \
-	&& R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" \
+	#&& R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" \
+	&& RUN R -e "install.packages('rJava', repos = 'http://cran.us.r-project.org')" 
    # && Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))' \
    # && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
  # && rm -rf /var/lib/apt/lists/*               *
