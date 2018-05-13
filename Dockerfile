@@ -43,7 +43,7 @@ RUN apt-get update -qq \
 			 r-glmnet\
 			 r-gbm\
 			 r-e1071\
-			 r-pamr\
+			 r-pamr
 			 #source("https://bioconductor.org/biocLite.R")
 #biocLite("pathifier")	 
 
