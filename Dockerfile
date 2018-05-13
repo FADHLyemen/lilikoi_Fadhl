@@ -1,6 +1,6 @@
 #FROM andrewosh/binder-base:latest
 FROM rocker/tidyverse:latest
-#FROM jupyter/datascience-notebook:160eb5183ace
+FROM jupyter/datascience-notebook:160eb5183ace
 #FROM jupyter/base-notebook:b4dd11e16ae4
 #LABEL maintainer="Peter Gensler <peterjgensler@gmail.com>"
 #USER root
@@ -13,7 +13,7 @@ FROM rocker/tidyverse:latest
 
 # Make ~/.R
 #RUN mkdir -p $HOME/.R
-#RUN pip install --no-cache-dir notebook==5.*
+RUN pip install --no-cache-dir notebook==5.*
 # Specify the default command to run
 #CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
 #ENV NB_USER jovyan
