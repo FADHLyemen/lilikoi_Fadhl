@@ -38,9 +38,9 @@ RUN R -e 'devtools::install_version("Matrix", version = "1.2-12", repos = "http:
 RUN R -e 'devtools::install_version("randomForest", version = "4.6-12", repos = "http://cran.us.r-project.org")'
 RUN R -e 'devtools::install_version("rJava", version = "0.9-9", repos = "http://cran.us.r-project.org")'
 	
-#RUN conda install --quiet --yes \
-	#'r-base=3.4.3' \
-	#'r-rjava=0.9-9' \
+RUN conda install --quiet --yes \
+	'r-base=3.4.3' \
+	'r-rjava=0.9-9' \
     #'r-irkernel=0.8*' && \
 	#'r-cluster_2.0.6'\
 	#'r-e1071_1.6-8'\
