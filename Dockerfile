@@ -29,7 +29,7 @@ RUN conda install --quiet --yes \
     'r-base=3.4.3' \
     'r-irkernel=0.8*' \
     'r-plyr=1.8*' \
-    'r-devtools=1.13*' \
+    #'r-devtools=1.13*' \
     #'r-tidyverse=1.2*' \
     'r-shiny=1.0*' \
     'r-rmarkdown=1.8*' \
