@@ -21,8 +21,8 @@ RUN apt-get update -qq \
 		#r-base=${R_BASE_VERSION}* \
 		#r-base-dev=${R_BASE_VERSION}* \
 		#r-recommended=${R_BASE_VERSION}* \
-        && echo 'options(repos = c(CRAN = "https://cran.rstudio.com/"), download.file.method = "libcurl")' >> /etc/R/Rprofile.site \
-        && echo 'source("/etc/R/Rprofile.site")' >> /etc/littler.r \
+        #&& echo 'options(repos = c(CRAN = "https://cran.rstudio.com/"), download.file.method = "libcurl")' >> /etc/R/Rprofile.site \
+        #&& echo 'source("/etc/R/Rprofile.site")' >> /etc/littler.r \
     liblzma-dev \
 	libbz2-dev \
     clang  \
