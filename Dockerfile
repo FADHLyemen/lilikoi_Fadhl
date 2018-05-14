@@ -28,7 +28,7 @@ RUN apt-get update -qq \
 
 RUN R -e 'install.packages("devtools")'
 RUN R -e 'devtools::install_version("NMF", version = "0.20.6", repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("NMF", version = "0.20.6", repos = "http://cran.us.r-project.org")'
+RUN R -e 'devtools::install_version("cluster", version = "2.0.6", repos = "http://cran.us.r-project.org")'
 	
 	
 	
