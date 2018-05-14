@@ -43,7 +43,8 @@ RUN conda install --quiet --yes \
     'r-randomforest=4.6*' \
     #'r-htmltools=0.3*' \
     'r-sparklyr=0.7*' \
-    'r-htmlwidgets=1.0*' \
+    #'r-htmlwidgets=1.0*' \
+    #'r-htmlwidgets=1.0*' \
     'r-hexbin=1.27*' && \
     conda clean -tipsy && \
     fix-permissions $CONDA_DIR
