@@ -25,6 +25,7 @@ RUN apt-get update -qq \
 	&& apt-get install libgdal1-dev libproj-dev -y
 	
 RUN conda install --quiet --yes \
+    'r-rjava=0.9-9' \
     'r-base=3.4.1' \
     'r-irkernel=0.8*' \
     'r-plyr=1.8*' \
