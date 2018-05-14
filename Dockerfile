@@ -25,27 +25,46 @@ RUN apt-get update -qq \
 	&& apt-get install libgdal1-dev libproj-dev -y
 	
 RUN conda install --quiet --yes \
-    'r-rjava=0.9-9' \
     'r-base=3.4.3' \
+	'r-rjava=0.9-9' \
     'r-irkernel=0.8*' \
-    'r-plyr=1.8*' \
+	'r-cluster_2.0.6'\
+	'r-e1071_1.6-8'\
+	'r-gbm_2.1.3'\
+	'r-glmnet_2.0-13'\
+	'r-foreach_1.4.4'\
+	'r-randomForest_4.6-12'\
+	'r-Matrix_1.2-12'\
+	'r-Hmisc_4.1-1'\
+	'r-Formula_1.2-2'\
+	'r-survival_2.41-3'\
+	'r-reshape2_1.4.3'\     
+	'r-infotheo_1.2.0'\
+	'r-dplyr_0.7.4'\
+	'r-devtools_1.13.5'\
+	'r-corrplot_0.84'\
+	'r-pROC_1.10.0'\
+	'r-RWeka_0.4-36'\       
+	'r-caret_6.0-78'\
+	'r-ggplot2_2.2.1'&&\
+    #'r-plyr=1.8*' \
     #'r-devtools=1.13*' \
     #'r-tidyverse=1.2*' \
-    'r-shiny=1.0*' \
-    'r-rmarkdown=1.8*' \
-    'r-forecast=8.2*' \
-    'r-rsqlite=2.0*' \
-    'r-reshape2=1.4*' \
-    'r-nycflights13=0.2*' \
-    'r-caret=6.0*' \
-    'r-rcurl=1.95*' \
-    'r-crayon=1.3*' \
-    'r-randomforest=4.6*' \
-    'r-htmltools=0.3*' \
-    'r-sparklyr=0.8*' \
+    #'r-shiny=1.0*' \
+    #'r-rmarkdown=1.8*' \
+    #'r-forecast=8.2*' \
+    #'r-rsqlite=2.0*' \
+    #'r-reshape2=1.4*' \
+    #'r-nycflights13=0.2*' \
+    #'r-caret=6.0*' \
+    #'r-rcurl=1.95*' \
+    #'r-crayon=1.3*' \
+    #'r-randomforest=4.6*' \
+    #'r-htmltools=0.3*' \
+    #'r-sparklyr=0.8*' \
     #'r-htmlwidgets=1.2*' \
     #'r-htmlwidgets=1.2*' \
-    'r-hexbin=1.27*' && \
+    #'r-hexbin=1.27*' && \
     conda clean -tipsy && \
     fix-permissions $CONDA_DIR && \
     Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")'
