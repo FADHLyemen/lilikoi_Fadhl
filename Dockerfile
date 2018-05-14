@@ -12,8 +12,17 @@ USER ${NB_USER}
 
 USER root
 
+ENV R_BASE_VERSION 3.4.4
+
 RUN apt-get update -qq \
     && apt-get -y --no-install-recommends install \
+			littler \
+                r-cran-littler \
+		r-base=${R_BASE_VERSION}* \
+		r-base-dev=${R_BASE_VERSION}* \
+		r-recommended=${R_BASE_VERSION}* \
+        && echo 'options(repos = c(CRAN = "https://cran.rstudio.com/"), download.file.method = "libcurl")' >> /etc/R/Rprofile.site \
+        && echo 'source("/etc/R/Rprofile.site")' >> /etc/littler.r \
     liblzma-dev \
 	libbz2-dev \
     clang  \
@@ -26,24 +35,24 @@ RUN apt-get update -qq \
 	
 # R install section
 
-RUN R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("NMF", version = "0.20.6", repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("cluster", version = "2.0.6", repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("e1071", version = "1.6-8", repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("gbm", version = "2.1.3", repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("glmnet", version = "2.0-13", repos = "http://cran.us.r-project.org")'	
-RUN R -e 'devtools::install_version("foreach", version = "1.4.4", repos = "http://cran.us.r-project.org")'	
-RUN R -e 'devtools::install_version("randomForest", version = "4.6-12", repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("Matrix", version = "1.2-12", repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("randomForest", version = "4.6-12", repos = "http://cran.us.r-project.org")'
-#RUN R -e 'devtools::install_version("rJava", version = "0.9-9", repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
-RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
+#RUN R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")'
+#RUN R -e 'devtools::install_version("NMF", version = "0.20.6", repos = "http://cran.us.r-project.org")'
+#RUN R -e 'devtools::install_version("cluster", version = "2.0.6", repos = "http://cran.us.r-project.org")'
+#RUN R -e 'devtools::install_version("e1071", version = "1.6-8", repos = "http://cran.us.r-project.org")'
+#RUN R -e 'devtools::install_version("gbm", version = "2.1.3", repos = "http://cran.us.r-project.org")'
+#RUN R -e 'devtools::install_version("glmnet", version = "2.0-13", repos = "http://cran.us.r-project.org")'	
+#RUN R -e 'devtools::install_version("foreach", version = "1.4.4", repos = "http://cran.us.r-project.org")'	
+#RUN R -e 'devtools::install_version("randomForest", version = "4.6-12", repos = "http://cran.us.r-project.org")'
+#RUN R -e 'devtools::install_version("Matrix", version = "1.2-12", repos = "http://cran.us.r-project.org")'
+#RUN R -e 'devtools::install_version("randomForest", version = "4.6-12", repos = "http://cran.us.r-project.org")'
+##RUN R -e 'devtools::install_version("rJava", version = "0.9-9", repos = "http://cran.us.r-project.org")'
+#RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
+#RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
 	
-RUN conda install --quiet --yes \
-	'r-base=3.4.1' \
-	'r-rjava=0.9-9' \
-    'r-irkernel=0.8*' && \
+#RUN conda install --quiet --yes \
+#	'r-base=3.4.1' \
+#	'r-rjava=0.9-9' \
+#    'r-irkernel=0.8*' && \
 	#'r-cluster_2.0.6'\
 	#'r-e1071_1.6-8'\
 	#'r-gbm_2.1.3'\
@@ -81,8 +90,8 @@ RUN conda install --quiet --yes \
     #'r-htmlwidgets=1.2*' \
     #'r-htmlwidgets=1.2*' \
     #'r-hexbin=1.27*' && \
-    conda clean -tipsy && \
-    fix-permissions $CONDA_DIR 
+ #   conda clean -tipsy && \
+ #   fix-permissions $CONDA_DIR 
     #Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")'
     #&& Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))'
   #&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
