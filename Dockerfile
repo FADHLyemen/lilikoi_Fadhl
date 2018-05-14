@@ -15,6 +15,7 @@ USER root
 RUN apt-get update -qq \
     && apt-get -y --no-install-recommends install \
     liblzma-dev \
+	r-base=3.4.3\
     libbz2-dev \
     clang  \
     ccache \
@@ -24,29 +25,36 @@ RUN apt-get update -qq \
 	&& apt-get install r-cran-rjava -y\
 	&& apt-get install libgdal1-dev libproj-dev -y
 	
-RUN conda install --quiet --yes \
-    'r-base=3.4.3' \
-	'r-rjava=0.9-9' \
-    'r-irkernel=0.8*' \
-	'r-cluster_2.0.6'\
-	'r-e1071_1.6-8'\
-	'r-gbm_2.1.3'\
-	'r-glmnet_2.0-13'\
-	'r-foreach_1.4.4'\
-	'r-randomForest_4.6-12'\
-	'r-Matrix_1.2-12'\
-	'r-Hmisc_4.1-1'\
-	'r-Formula_1.2-2'\
-	'r-survival_2.41-3'\
-	'r-reshape2_1.4.3'\     
-	'r-infotheo_1.2.0'\
-	'r-dplyr_0.7.4'\
-	'r-devtools_1.13.5'\
-	'r-corrplot_0.84'\
-	'r-pROC_1.10.0'\
-	'r-RWeka_0.4-36'\       
-	'r-caret_6.0-78'\
-	'r-ggplot2_2.2.1'&&\
+# R install section
+
+#RUN R -e 'install.packages("devtools")'
+#RUN R -e 'devtools::install_version("NMF", version = "0.20.6", repos = "http://cran.us.r-project.org")'
+	
+	
+	
+	#RUN conda install --quiet --yes \
+    #'r-base=3.4.3' \
+	#'r-rjava=0.9-9' \
+    #'r-irkernel=0.8*' && \
+	#'r-cluster_2.0.6'\
+	#'r-e1071_1.6-8'\
+	#'r-gbm_2.1.3'\
+	#'r-glmnet_2.0-13'\
+	#'r-foreach_1.4.4'\
+	#'r-randomForest_4.6-12'\
+	#'r-Matrix_1.2-12'\
+	#'r-Hmisc_4.1-1'\
+	#'r-Formula_1.2-2'\
+	#'r-survival_2.41-3'\
+	#'r-reshape2_1.4.3'\     
+	#'r-infotheo_1.2.0'\
+	#'r-dplyr_0.7.4'\
+	#'r-devtools_1.13.5'\
+	#'r-corrplot_0.84'\
+	#'r-pROC_1.10.0'\
+	#'r-RWeka_0.4-36'\       
+	#'r-caret_6.0-78'\
+	#'r-ggplot2_2.2.1'&&\
     #'r-plyr=1.8*' \
     #'r-devtools=1.13*' \
     #'r-tidyverse=1.2*' \
@@ -65,11 +73,10 @@ RUN conda install --quiet --yes \
     #'r-htmlwidgets=1.2*' \
     #'r-htmlwidgets=1.2*' \
     #'r-hexbin=1.27*' && \
-    conda clean -tipsy && \
-    fix-permissions $CONDA_DIR && \
-    Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")'
-  
-  #&& Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))'
+    #conda clean -tipsy && \
+    #fix-permissions $CONDA_DIR && \ 
+    #Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")'
+    #&& Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))'
   #&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
   #&& rm -rf /var/lib/apt/lists/*	
 	
