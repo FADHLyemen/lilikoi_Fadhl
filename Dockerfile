@@ -12,7 +12,7 @@ USER ${NB_USER}
 
 USER root
 
-ENV R_BASE_VERSION 3.4.4
+#ENV R_BASE_VERSION 3.4.4
 
 RUN apt-get update -qq \
     && apt-get -y --no-install-recommends install \
