@@ -26,7 +26,7 @@ RUN apt-get update -qq \
 	
 RUN conda install --quiet --yes \
     'r-rjava=0.9-9' \
-    'r-base=3.4.1' \
+    'r-base=3.4.3' \
     'r-irkernel=0.8*' \
     'r-plyr=1.8*' \
     'r-devtools=1.13*' \
