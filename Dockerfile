@@ -30,7 +30,7 @@ RUN conda install --quiet --yes \
     'r-irkernel=0.8*' \
     'r-plyr=1.8*' \
     'r-devtools=1.13*' \
-    'r-tidyverse=1.1*' \
+    'r-tidyverse=1.2*' \
     'r-shiny=1.0*' \
     'r-rmarkdown=1.8*' \
     'r-forecast=8.2*' \
@@ -47,5 +47,6 @@ RUN conda install --quiet --yes \
     #'r-htmlwidgets=1.2*' \
     'r-hexbin=1.27*' && \
     conda clean -tipsy && \
-    fix-permissions $CONDA_DIR
+    fix-permissions $CONDA_DIR && \
+    Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("EBImage")'	
 	
