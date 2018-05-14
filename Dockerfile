@@ -51,8 +51,8 @@ RUN apt-get update -qq \
 	
 RUN conda install --quiet --yes \
 	'r-base=3.4.1' \
-	'r-mro-base=3.4.3'\
-	'r-rjava=0.8' \
+	'r-mro_test mro-base =3.4.3'\
+	'r-rjava=0.9*' \
     'r-irkernel=0.8*' && \
 	#'r-cluster_2.0.6'\
 	#'r-e1071_1.6-8'\
