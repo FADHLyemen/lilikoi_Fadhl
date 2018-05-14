@@ -81,8 +81,8 @@ RUN conda install --quiet --yes \
     #'r-htmlwidgets=1.2*' \
     #'r-htmlwidgets=1.2*' \
     #'r-hexbin=1.27*' && \
-    #conda clean -tipsy && \
-    #fix-permissions $CONDA_DIR 
+    conda clean -tipsy && \
+    fix-permissions $CONDA_DIR 
     #Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")'
     #&& Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))'
   #&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
