@@ -55,7 +55,7 @@ RUN conda install --quiet --yes \
 	'r-rjava=0.9*' \
     'r-cluster=2.0.6'\
 	'r-e1071=1.6_8'\
-	'r-gbm=2.1.3' \
+	'r-gbm=2.1*' \
 	'r-glmnet=2.0*'\
 	'r-foreach=1.4.4'\
 	'r-randomForest=4.6_12'\
