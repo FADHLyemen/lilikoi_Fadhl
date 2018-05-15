@@ -70,15 +70,17 @@ RUN conda install --quiet --yes \
 	'r-infotheo=1.2*'\
 	'r-dplyr=0.7.4'\
 	#'r-devtools=1.13.4'\
-	#'r-corrplot=0.77'\
+	'r-corrplot=0.77'\
 	'r-pROC=1.10.0'\
 	#'rweka=0.4.34'\       
 	'r-caret=6.0_78'\
 	'r-ggplot2=2.2.1'&&\
     conda clean -tipsy && \
     fix-permissions $CONDA_DIR &&\
-    R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' \
-    R -e 'install.packages("corrplot", repos = "http://cran.us.r-project.org")'&&\	
+    conda install -c glaxosmithkline r-rwekajars &&\
+    conda install -c kurtwheeler cran-rweka && \	
+	#R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' \
+    #R -e 'install.packages("corrplot", repos = "http://cran.us.r-project.org")'&&\	
     Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")' \
    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
    && rm -rf /var/lib/apt/lists/*	
