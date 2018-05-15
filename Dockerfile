@@ -78,7 +78,7 @@ RUN conda install --quiet --yes \
     conda clean -tipsy && \
     fix-permissions $CONDA_DIR &&\
 	R CMD javareconf &&\
-	R -e 'install.packages("rJava",type = "source")' &&\
+	R -e 'install.packages("rJava",type = "source",repos = "http://cran.us.r-project.org")' &&\
     #conda install -c glaxosmithkline r-rwekajars &&\
     #conda install -c kurtwheeler cran-rweka && \	
 	 R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' &&\
