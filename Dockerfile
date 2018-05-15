@@ -50,8 +50,7 @@ RUN R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' &
 #RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
 #RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
 	
-RUN conda uninstall --quiet --yes \
-	'r-devtools=1.13*' \
+RUN conda uninstall 'r-devtools=1.13*' 
 	
 RUN conda install --quiet --yes \
 	'r-base=3.4.1' \
