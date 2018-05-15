@@ -31,7 +31,8 @@ RUN apt-get update -qq \
     default-jre \
     && R CMD javareconf\
 	&& apt-get install r-cran-rjava -y\
-	&& apt-get install libgdal1-dev libproj-dev -y
+	&& apt-get install libgdal1-dev libproj-dev -y \
+	&& apt-get install weka -y
 	
 # R install section
 
