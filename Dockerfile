@@ -56,7 +56,7 @@ RUN conda install --quiet --yes \
     'r-cluster=2.0.6'\
 	'r-e1071=1.6_8'\
 	'r-gbm=2.1.3' \
-	'r-glmnet=2.0_13'\
+	'r-glmnet=2.0*'\
 	'r-foreach=1.4.4'\
 	'r-randomForest=4.6_12'\
 	'r-matrix=1.2_12'\
@@ -64,7 +64,7 @@ RUN conda install --quiet --yes \
 	#'r-formula=1.2_2'\
 	'r-survival=2.41_3'\
 	'r-reshape2=1.4.3'\     
-	'r-infotheo=1.2.0'\
+	'r-infotheo=1.2*'\
 	'r-dplyr=0.7.4'\
 	'r-devtools=1.13.4'\
 	#'r-corrplot=0.77'\
