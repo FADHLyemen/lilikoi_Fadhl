@@ -51,7 +51,7 @@ RUN    R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' 
 #RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
 	
 RUN conda uninstall \
-         'r-devtools=1.13.4' 
+         'r-devtools=1.13*' 
 		 #'r-devtools=1.13.4'
 	
 RUN conda install --quiet --yes \
