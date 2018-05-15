@@ -36,8 +36,9 @@ RUN apt-get update -qq \
 # R install section
 
 RUN R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' && \
-    R -e 'devtools::install_github("RWeka", version = "0.4-36", repos = "http://cran.us.r-project.org")'
-#RUN R -e 'devtools::install_version("cluster", version = "2.0.6", repos = "http://cran.us.r-project.org")'
+    R -e 'install_packages("RWeka", repos = "http://cran.us.r-project.org")' \
+    R -e 'devtools::install_version("corrplot", version = "0.84", repos = "http://cran.us.r-project.org")'
+	
 #RUN R -e 'devtools::install_version("e1071", version = "1.6-8", repos = "http://cran.us.r-project.org")'
 #RUN R -e 'devtools::install_version("gbm", version = "2.1.3", repos = "http://cran.us.r-project.org")'
 #RUN R -e 'devtools::install_version("glmnet", version = "2.0-13", repos = "http://cran.us.r-project.org")'	
