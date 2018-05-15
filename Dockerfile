@@ -50,7 +50,7 @@ RUN apt-get update -qq \
 #RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
 	
 RUN conda install --quiet --yes \
-	#'r-base=3.4.1' \
+	'r-tidyverse=1.2*' \
 	'r-sparklyr=0.8*' \
 	'r-base=3.4.3' \
 	#'mro-base=3.4.3'\
