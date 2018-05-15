@@ -70,7 +70,7 @@ RUN conda install --quiet --yes \
 	'r-reshape2=1.4.3'\     
 	'r-infotheo=1.2*'\
 	'r-dplyr=0.7.4'\
-	'r-devtools=1.13.4'\
+	#'r-devtools=1.13.4'\
 	#'r-corrplot=0.77'\
 	'r-pROC=1.10.0'\
 	#'rweka=0.4.34'\       
