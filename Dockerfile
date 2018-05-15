@@ -35,9 +35,9 @@ RUN apt-get update -qq \
 	
 # R install section
 
-RUN R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' && \
-    R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' \
-    R -e 'devtools::install_version("corrplot", version = "0.84", repos = "http://cran.us.r-project.org")'
+# R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' && \
+RUN    R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' \
+       R -e 'install.packages("corrplot", repos = "http://cran.us.r-project.org")'
 	
 #RUN R -e 'devtools::install_version("e1071", version = "1.6-8", repos = "http://cran.us.r-project.org")'
 #RUN R -e 'devtools::install_version("gbm", version = "2.1.3", repos = "http://cran.us.r-project.org")'
@@ -51,8 +51,8 @@ RUN R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' &
 #RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
 	
 RUN conda uninstall \
-         'r-devtools=1.13.5' \
-		 'r-devtools=1.13.4'
+         'r-devtools=1.13.4' 
+		 #'r-devtools=1.13.4'
 	
 RUN conda install --quiet --yes \
 	'r-base=3.4.1' \
