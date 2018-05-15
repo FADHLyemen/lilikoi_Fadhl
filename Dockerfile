@@ -55,7 +55,7 @@ RUN conda install --quiet --yes \
     'r-cluster=2.0.6'\
 	'r-e1071=1.6_8'\
 	'r-gbm=2.1.3' &&\
-	'r-glmnet=2.0-13'\
+	'r-glmnet=2.0_13'\
 	'r-foreach=1.4.4'\
 	'r-randomForest=4.6_12'\
 	'r-matrix=1.2_12'\
@@ -69,7 +69,7 @@ RUN conda install --quiet --yes \
 	'r-corrplot=0.77'\
 	'r-pROC=1.10.0'\
 	'cran-rweka=0.4.34'\       
-	'r-caret=6.0-78'\
+	'r-caret=6.0_78'\
 	'r-ggplot2=2.2.1'&&\
     #'r-plyr=1.8*' \
     #'r-devtools=1.13*' \
