@@ -64,12 +64,12 @@ RUN conda install --quiet --yes \
 	'r-randomForest=4.6_12'\
 	'r-matrix=1.2_12'\
 	'r-hmisc=4.0_3'\
-	#'r-formula=1.2_2'\
+	'r-formula=1.2_2'\
 	'r-survival=2.41_3'\
 	'r-reshape2=1.4.3'\     
 	'r-infotheo=1.2*'\
 	'r-dplyr=0.7.4'\
-	#'r-devtools=1.13.4'\
+	'r-devtools=1.13.5'\
 	'r-corrplot=0.77'\
 	'r-pROC=1.10.0'\
 	#'rweka=0.4.34'\       
@@ -77,6 +77,7 @@ RUN conda install --quiet --yes \
 	'r-ggplot2=2.2.1'&&\
     conda clean -tipsy && \
     fix-permissions $CONDA_DIR &&\
+	R CMD javareconf &&\
     conda install -c glaxosmithkline r-rwekajars &&\
     conda install -c kurtwheeler cran-rweka && \	
 	#R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' \
