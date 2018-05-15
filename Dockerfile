@@ -50,10 +50,10 @@ RUN apt-get update -qq \
 #RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
 	
 RUN conda install --quiet --yes \
-    'r-prettyunits=1.0.2'\ 
-	'r-tidyverse=1.2*' \
-	'r-sparklyr=0.8*' \
-	'r-base=3.4.3' \
+    #'r-prettyunits=1.0.2'\ 
+	#'r-tidyverse=1.2*' \
+	#'r-sparklyr=0.8*' \
+	'r-base=3.4.1' \
 	'r-rjava=0.9*' \
     'r-irkernel=0.8*' && \
 	#'r-cluster_2.0.6'\
