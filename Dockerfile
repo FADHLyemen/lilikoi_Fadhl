@@ -36,8 +36,7 @@ RUN apt-get update -qq \
 # R install section
 
 # R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' && \
-RUN    R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' \
-       R -e 'install.packages("corrplot", repos = "http://cran.us.r-project.org")'
+
 	
 #RUN R -e 'devtools::install_version("e1071", version = "1.6-8", repos = "http://cran.us.r-project.org")'
 #RUN R -e 'devtools::install_version("gbm", version = "2.1.3", repos = "http://cran.us.r-project.org")'
@@ -50,9 +49,9 @@ RUN    R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' 
 #RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
 #RUN R -e 'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'
 	
-RUN conda uninstall \
-         'r-devtools=1.13*' 
-		 #'r-devtools=1.13.4'
+#RUN conda uninstall \
+#         'r-devtools=1.13*' 
+#		 #'r-devtools=1.13.4'
 	
 RUN conda install --quiet --yes \
 	'r-base=3.4.1' \
@@ -77,9 +76,11 @@ RUN conda install --quiet --yes \
 	'r-caret=6.0_78'\
 	'r-ggplot2=2.2.1'&&\
     conda clean -tipsy && \
-    fix-permissions $CONDA_DIR 
-    #Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")'
+    fix-permissions $CONDA_DIR &&\
+    R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' \
+    R -e 'install.packages("corrplot", repos = "http://cran.us.r-project.org")'&&\	
+    Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")' &&\
     #&& Rscript -e 'devtools::install_github(c("hadley/multidplyr","jeremystan/tidyjson","ropenscilabs/skimr"))'
-  #&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
-  #&& rm -rf /var/lib/apt/lists/*	
+   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
+   && rm -rf /var/lib/apt/lists/*	
 	
