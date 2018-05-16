@@ -85,7 +85,7 @@ RUN conda install --quiet --yes \
 	#R -e 'install.packages("rJava",type = "source",repos = "http://cran.us.r-project.org")' &&\
     conda install -c glaxosmithkline r-rweka  &&\
     #conda install -c kurtwheeler cran-rweka && \	
-	 R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' &&\
+	 #R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' &&\
 	 #R -e 'install.packages("corrplot", repos = "http://cran.us.r-project.org")'&&\	
     Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")' \
    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
