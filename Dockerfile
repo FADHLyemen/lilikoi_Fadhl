@@ -82,11 +82,11 @@ RUN conda install --quiet --yes \
 	#ln -f -s $(JAVA_HOME)/lib/amd64/server /usr/local/lib &&\
 	LD_LIBRARY_PATH=/usr/lib/jvm/default-java/jre/lib/amd64/server/ &&\
     #source /etc/environment &&\
-	R -e 'install.packages("rJava",type = "source",repos = "http://cran.us.r-project.org")' &&\
-    conda install -c glaxosmithkline r-rwekajars &&\
-    conda install -c kurtwheeler cran-rweka && \	
+	#R -e 'install.packages("rJava",type = "source",repos = "http://cran.us.r-project.org")' &&\
+    conda install -c glaxosmithkline r-rweka  &&\
+    #conda install -c kurtwheeler cran-rweka && \	
 	 R -e 'install.packages("RWeka", repos = "http://cran.us.r-project.org")' &&\
-	 R -e 'install.packages("corrplot", repos = "http://cran.us.r-project.org")'&&\	
+	 #R -e 'install.packages("corrplot", repos = "http://cran.us.r-project.org")'&&\	
     Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")' \
    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
    && rm -rf /var/lib/apt/lists/*	
