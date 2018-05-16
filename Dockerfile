@@ -79,9 +79,9 @@ RUN conda install --quiet --yes \
     conda clean -tipsy && \
     fix-permissions $CONDA_DIR &&\
 	R CMD javareconf &&\
-	ln -f -s $(JAVA_HOME)/lib/amd64/server /usr/local/lib &&\
+	#ln -f -s $(JAVA_HOME)/lib/amd64/server /usr/local/lib &&\
 	LD_LIBRARY_PATH=/usr/lib/jvm/default-java/jre/lib/amd64/server/ &&\
-    source /etc/environment &&\
+    #source /etc/environment &&\
 	R -e 'install.packages("rJava",type = "source",repos = "http://cran.us.r-project.org")' &&\
     conda install -c glaxosmithkline r-rwekajars &&\
     conda install -c kurtwheeler cran-rweka && \	
