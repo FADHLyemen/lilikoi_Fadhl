@@ -55,6 +55,7 @@ RUN  R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' 
 	 R -e  'devtools::install_version("RWeka", version = "0.4-36", repos = "http://cran.us.r-project.org")' \
 	 R -e  'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'  \
 	 R -e  'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'  \
+	 R -e  'devtools::install_version("corrplot", version = "0.84", repos = "http://cran.us.r-project.org")'  \
 	#R -e 'install.packages("https://bioconductor.org/packages/release/bioc/src/contrib/pathifier_1.18.0.tar.gz", repos = NULL, type = "source")' \
    && Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")' \
    && Rscript -e 'devtools::install_git("git://github.com/fadhlyemen/lilikoi_Fadhl")' \
