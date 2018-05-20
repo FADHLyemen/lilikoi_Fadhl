@@ -14,12 +14,8 @@ USER root
 RUN conda uninstall 'r-base=3.4.1' 
 RUN conda install 'r-base=3.4.3' \
     'r-irkernel=0.8*'
-	
-	
-	
 
 RUN apt-get update && apt-get install -y gnupg2
-
 ## Install Java FROM cardcorp/r-java 
 RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
       | tee /etc/apt/sources.list.d/webupd8team-java.list \
@@ -47,6 +43,8 @@ RUN ln -s /bin/tar /bin/gtar
 RUN apt-get install g++ 
 RUN  R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' \ 
      R -e  'devtools::install_version("e1071", version = "1.6-8", repos = "http://cran.us.r-project.org")' \
+	 R -e  'devtools::install_version("caret", version = "6.0-79", repos = "http://cran.us.r-project.org")' \
+	 R -e  'devtools::install_version("pamr", version = "1.55", repos = "http://cran.us.r-project.org")' \
 	 R -e  'devtools::install_version("gbm", version = "2.1.3", repos = "http://cran.us.r-project.org")' \
 	 R -e  'devtools::install_version("glmnet", version = "2.0-13", repos = "http://cran.us.r-project.org")' \	
 	 R -e  'devtools::install_version("foreach", version = "1.4.4", repos = "http://cran.us.r-project.org")'	\
