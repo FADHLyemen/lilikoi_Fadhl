@@ -10,6 +10,13 @@ USER ${NB_USER}
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
 USER root
 
+# R packages
+RUN conda uninstall 'r-base=3.4.1' 
+RUN conda install 'r-base=3.4.3' \
+    'r-irkernel=0.8*'
+	
+	
+	
 
 RUN apt-get update && apt-get install -y gnupg2
 
@@ -37,7 +44,7 @@ RUN /sbin/ldconfig
 
 ## Install rJava package
 RUN ln -s /bin/tar /bin/gtar 
-
+RUN apt-get install g++ 
 RUN  R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' \ 
      R -e  'devtools::install_version("e1071", version = "1.6-8", repos = "http://cran.us.r-project.org")' \
 	 R -e  'devtools::install_version("gbm", version = "2.1.3", repos = "http://cran.us.r-project.org")' \
@@ -50,7 +57,9 @@ RUN  R -e 'install.packages("devtools",repos = "http://cran.us.r-project.org")' 
 	 R -e  'devtools::install_version("RWeka", version = "0.4-36", repos = "http://cran.us.r-project.org")' \
 	 R -e  'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'  \
 	 R -e  'devtools::install_version("Hmisc", version = "4.1-1", repos = "http://cran.us.r-project.org")'  \
-
+	#R -e 'install.packages("https://bioconductor.org/packages/release/bioc/src/contrib/pathifier_1.18.0.tar.gz", repos = NULL, type = "source")' \
+   && Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("pathifier")' \
+   && Rscript -e 'devtools::install_git("git://github.com/fadhlyemen/lilikoi_Fadhl")' \
    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
    && rm -rf /var/lib/apt/lists/*
 
